@@ -10,11 +10,9 @@ import Firebase //FB
 
 class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var mail_TF: UITextField!
-    @IBOutlet weak var pass_TF: UITextField!
+    @IBOutlet weak var id_TF: UITextField!
     
-    var emailadress :String = ""
-    var pass :String = ""
+    var groupID :String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +20,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.hidesBackButton = true
         
         //TF
-        mail_TF.delegate = self
-        pass_TF.delegate = self
-        
-        mail_TF.tag = 0
-        pass_TF.tag = 1
+        id_TF.delegate = self
         
         
         // Do any additional setup after loading the view.
@@ -37,14 +31,9 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() //キーボードを閉じる
         
-        if textField.tag == 0 {
-        emailadress = textField.text!
-        print("sharedEmailadress: \(emailadress)")
-            
-        } else if textField.tag == 1 {
-            pass = textField.text!
-            print("sharedPassword: \(pass)")
-        }
+        groupID = textField.text!
+        print("sharedEmailadress: \(groupID)")
+        
         return true //戻り値
     }
     
@@ -67,26 +56,16 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func gonext() {
         
         
-        if emailadress == "" {
-            alert(title: "メールアドレスが\n正しく入力されていません", message: "メールアドレスを\nもう一度入れ直してください。")
-            print("error: emailadress not found")
+        if groupID == "" {
+            alert(title: "グループIDが\n正しく入力されていません", message: "グループIDを\nもう一度入れ直してください。")
+            print("error: group ID not found")
             
-        } else if pass == "" {
-            alert(title: "パスワードが\n正しく入力されていません", message: "パスワードを\nもう一度入れ直してください。")
-            print("error: password not found")
-            
-        } else {
+        }  else {
             
         
         
-        //MARK: ★navigation遷移
-        func pushViewController(_ viewcontroller: UIViewController, animated: Bool) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewcontroller = storyboard.instantiateInitialViewController() as? Login_1_4_ViewController else { return }
-            
-            self.navigationController?.pushViewController(viewcontroller, animated: true)
-        }
-        //navigation遷移
+            //MARK: ★navigation遷移
+            //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)
         
     }
 }

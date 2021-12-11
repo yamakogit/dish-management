@@ -1,38 +1,23 @@
 //
-//  Login_2-2 ViewController.swift
+//  Login_1-5 ViewController.swift
 //  dish-management
 //
-//  Created by 山田航輝 on 2021/11/28.
+//  Created by 山田航輝 on 2021/12/11.
 //
 
 import UIKit
 
-class Login_2_2_ViewController: UIViewController {
+class Login_1_5_ViewController: UIViewController {
 
-    @IBOutlet var name_Label: UILabel!
-    
+    @IBOutlet weak var id_TF: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.hidesBackButton = true
+
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func gonext() {
-        
-        
-        
-        
-        //MARK: ★navigation遷移
-        //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)
-    }
-    
-    @IBAction func cancel() {
-        
-    }
-    
-    
+
     /*
     // MARK: - Navigation
 

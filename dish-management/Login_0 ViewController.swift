@@ -8,6 +8,7 @@
 import UIKit
 import Firebase //FB
 import FirebaseAuth
+import FirebaseFirestore
 
 class Login_0_ViewController: UIViewController, UITextFieldDelegate {
 
@@ -15,6 +16,8 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var mail_TF :UITextField!
     @IBOutlet var user_TF :UITextField!
     @IBOutlet var pass_TF :UITextField!
+    
+    var activityIndicatorView = UIActivityIndicatorView()
     
     var emailadress :String = ""
     var username :String = ""
@@ -35,7 +38,10 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         user_TF.tag = 1
         pass_TF.tag = 2
         
-        
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        view.addSubview(activityIndicatorView)
         
         
         // Do any additional setup after loading the view.
@@ -87,13 +93,20 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
             print("error: password not found")
             
         } else {
+            
+            activityIndicatorView.startAnimating()
+            
             Auth.auth().createUser (withEmail: emailadress, password: pass) {
                 authResult, error in
             print("succeed: login")
-            
-                //MARK: ★navigation遷移@
-//                performSegue(withIdentifier: <#T##String#>, sender: nil)
-                //navigation遷移
+                
+                self.activityIndicatorView.startAnimating()
+                
+                UserDefaults.standard.set(self.username, forKey: "username")
+                
+                //MARK: ★navigation遷移
+                self.performSegue(withIdentifier: "go-L-1-1", sender: nil)
+
                 
             }
         }

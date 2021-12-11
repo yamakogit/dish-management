@@ -25,13 +25,7 @@ class Login_1_4_ViewController: UIViewController {
         
         
         //MARK: ★navigation遷移
-        func pushViewController(_ viewcontroller: UIViewController, animated: Bool) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewcontroller = storyboard.instantiateInitialViewController() as? Login_3_ViewController else { return }
-            
-            self.navigationController?.pushViewController(viewcontroller, animated: true)
-        }
-        //navigation遷移
+        //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)
         
     }
     

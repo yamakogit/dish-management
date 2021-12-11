@@ -7,7 +7,8 @@
 
 import UIKit
 import Firebase  //FB
-import FirebaseAuth
+import FirebaseFirestore
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //FB
         FirebaseApp.configure()
+        let db = Firestore.firestore()
+        
         return true
     }
 

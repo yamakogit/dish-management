@@ -163,6 +163,7 @@
                         <outlet property="pass_TF" destination="Aga-aJ-1sa" id="2lN-ZD-3Wa"/>
                         <outlet property="user_TF" destination="BQm-PM-gjx" id="dpS-Q7-rQG"/>
                         <segue destination="4zN-xF-jMi" kind="show" identifier="go-L-1-1" id="lUW-WW-TGV"/>
+                        <segue destination="XhO-67-g3V" kind="show" identifier="go-L-2-1" id="qdz-PO-4hF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -233,7 +234,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="adultMode" destination="4zN-xF-jMi" eventType="touchUpInside" id="nOT-iv-OpD"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="Bn7-Ic-Rw8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t44-qA-1dT" userLabel="Adult_Gonext_Button">
@@ -243,7 +243,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="adultMode" destination="4zN-xF-jMi" eventType="touchUpInside" id="ivm-zi-hFW"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="9c0-Ay-8I4"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="rct-dZ-gUw" userLabel="Child_TFimg_Img">
@@ -260,7 +259,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="childMode" destination="4zN-xF-jMi" eventType="touchUpInside" id="896-Jj-kjv"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="UIa-WZ-QpP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWa-mT-JDf" userLabel="Child_Gonext_Button">
@@ -270,7 +268,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="childMode" destination="4zN-xF-jMi" eventType="touchUpInside" id="0Is-Ti-Ygt"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="nBR-2e-HZh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-PN-Y5G" userLabel="Detail_モードとは？_Button">
@@ -302,6 +299,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pG8-kB-Uiw"/>
+                    <connections>
+                        <segue destination="SKO-R2-7hI" kind="show" identifier="1-go-L-1-2" id="x9S-Sf-4ts"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8n-c9-nWP" sceneMemberID="firstResponder"/>
             </objects>
@@ -335,8 +335,8 @@
                                     <constraint firstAttribute="width" constant="350" id="A7B-RZ-4yF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="リストの共有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36T-vm-EcM" userLabel="Detail_リスト共有_Label">
-                                <rect key="frame" x="86" y="291" width="242" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="グループについて" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36T-vm-EcM" userLabel="Detail_リスト共有_Label">
+                                <rect key="frame" x="46" y="291" width="322" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="0EP-Ll-XHW"/>
                                     <constraint firstAttribute="height" constant="47" id="gYt-BH-6HM"/>
@@ -351,8 +351,8 @@
                                     <constraint firstAttribute="height" constant="47" id="KGc-oK-1vT"/>
                                     <constraint firstAttribute="width" constant="200" id="PCx-7e-ieh"/>
                                 </constraints>
-                                <string key="text">作りものリストを
-他の人と共有しますか？</string>
+                                <string key="text">すでにグループを
+作成していますか？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -366,12 +366,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="　他の人と共有する">
+                                <buttonConfiguration key="configuration" style="plain" title="　グループを新規作成">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="share" destination="SKO-R2-7hI" eventType="touchUpInside" id="BGe-ob-BQE"/>
-                                    <segue destination="Vw6-sS-tAb" kind="show" id="UTt-Qy-lSp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN7-hR-82a" userLabel="Share_Gonext_Button">
@@ -381,7 +380,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="share" destination="SKO-R2-7hI" eventType="touchUpInside" id="1Zc-8W-mka"/>
-                                    <segue destination="Vw6-sS-tAb" kind="show" id="pOe-8P-HVy"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="O93-Wb-5nA" userLabel="NotShare_TFimg_Img">
@@ -393,12 +391,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="　他の人と共有しない">
+                                <buttonConfiguration key="configuration" style="plain" title="　すでにグループがある">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="notShare" destination="SKO-R2-7hI" eventType="touchUpInside" id="1Gp-oT-Jxc"/>
-                                    <segue destination="xMC-JE-D9d" kind="show" id="5qv-6O-Zie"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Un-ES-idq" userLabel="NotShare_Gonext_Button">
@@ -408,15 +405,14 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="notShare" destination="SKO-R2-7hI" eventType="touchUpInside" id="R9P-B4-5eC"/>
-                                    <segue destination="xMC-JE-D9d" kind="show" id="xDG-2b-TGN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W53-Ho-Lqx" userLabel="Detail_Explain_Label">
                                 <rect key="frame" x="56" y="642" width="302" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">指定した人とのみ
-リストを共有できます。
-リストは素早く同期されます。</string>
+                                <string key="text">リスト共有やメニュー送信を
+行うには、同じグループに
+所属する必要があります。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -425,7 +421,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXz-9W-2ZM" userLabel="Detail_リスト共有とは？_Button">
                                 <rect key="frame" x="122" y="735" width="171" height="34"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="リストの共有とは？">
+                                <buttonConfiguration key="configuration" style="plain" title="グループ機能とは？">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -451,10 +447,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SlJ-Ut-Pvg"/>
+                    <connections>
+                        <segue destination="Vw6-sS-tAb" kind="show" identifier="go-L-1-3" id="QRq-wI-tU3"/>
+                        <segue destination="8tY-CV-QyT" kind="show" identifier="go-L-1-5" id="Stw-Gq-agQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zax-Oo-25f" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895.6521739130437" y="-91.071428571428569"/>
+            <point key="canvasLocation" x="1896" y="-91"/>
         </scene>
         <!--Login_1-3 VC-->
         <scene sceneID="UaA-0R-SLc">
@@ -484,7 +484,7 @@
                                     <constraint firstAttribute="width" constant="350" id="CvO-QS-Kr9"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="リストの共有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0C-Ic-IDk" userLabel="Detail_リスト共有_Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="グループ入力" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0C-Ic-IDk" userLabel="Detail_リスト共有_Label">
                                 <rect key="frame" x="86" y="291" width="242" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="X3S-EW-x7r"/>
@@ -495,62 +495,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ5-fV-5XR" userLabel="Detail_共有しますか？_Label">
-                                <rect key="frame" x="25" y="347" width="364" height="90"/>
+                                <rect key="frame" x="25" y="361" width="364" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Pl5-gH-Dd1"/>
                                     <constraint firstAttribute="height" constant="47" id="Zw6-qe-PiR"/>
                                 </constraints>
-                                <string key="text">誰のリストを
-共有しますか？</string>
+                                <string key="text">どのグループに
+所属しますか？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVA-74-BOV" userLabel="Detail_入力してください_Label">
-                                <rect key="frame" x="80" y="445" width="254" height="85"/>
+                                <rect key="frame" x="80" y="475" width="254" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">共有元のユーザー情報を
+                                <string key="text">発行済のグループIDを
 入力してください。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="l5L-1a-Kr3" userLabel="Mail_TFimg_Img">
-                                <rect key="frame" x="52" y="548" width="310" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　メールアドレスを入力..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQt-c5-kIK" userLabel="Mail_TF">
-                                <rect key="frame" x="101" y="547" width="260" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="envelope.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ekJ-54-ezC" userLabel="Mail_Mailimg_Img">
-                                <rect key="frame" x="57" y="553" width="40" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="Jbn-Ve-Fui" userLabel="Pass_TFimg_Img">
-                                <rect key="frame" x="52" y="640" width="310" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　パスワードを設定..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-On-EBn" userLabel="Pass_TF">
-                                <rect key="frame" x="101" y="641" width="260" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="brS-fa-mQ7" userLabel="Pass_Blackcircle_Img">
-                                <rect key="frame" x="60" y="647" width="35" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="key.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-uW-yhI" userLabel="Pass_Key_Img">
-                                <rect key="frame" x="67" y="652" width="20" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-Fb-wal" userLabel="Detail_Gonext_Button">
                                 <rect key="frame" x="182" y="725" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -558,9 +523,23 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="gonext" destination="Vw6-sS-tAb" eventType="touchUpInside" id="vBy-iT-BUx"/>
-                                    <segue destination="WOC-fQ-dTt" kind="show" id="CWU-8q-Wub"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="l5L-1a-Kr3" userLabel="Mail_TFimg_Img">
+                                <rect key="frame" x="52" y="601" width="310" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　グループIDを入力..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQt-c5-kIK" userLabel="Mail_TF">
+                                <rect key="frame" x="101" y="600" width="260" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="envelope.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ekJ-54-ezC" userLabel="Mail_Mailimg_Img">
+                                <rect key="frame" x="57" y="606" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZWg-ao-tg0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -579,6 +558,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Zf-Xl-ree"/>
+                    <connections>
+                        <segue destination="WOC-fQ-dTt" kind="show" identifier="go-L-1-4" id="hcE-IY-Mqk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6YU-xL-btO" sceneMemberID="firstResponder"/>
             </objects>
@@ -641,8 +623,8 @@
                                     <constraint firstAttribute="width" constant="200" id="lrI-VH-CJ4"/>
                                     <constraint firstAttribute="height" constant="47" id="tqA-Uo-bQc"/>
                                 </constraints>
-                                <string key="text">さん
-とリストを共有します</string>
+                                <string key="text">グループ
+に所属します</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -661,7 +643,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="gonext" destination="WOC-fQ-dTt" eventType="touchUpInside" id="1sT-do-hA0"/>
-                                    <segue destination="xMC-JE-D9d" kind="show" id="IDZ-xp-PIr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbh-ex-piY" userLabel="Next_Gonext_Button">
@@ -671,7 +652,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="gonext" destination="WOC-fQ-dTt" eventType="touchUpInside" id="MZ0-oj-ihI"/>
-                                    <segue destination="xMC-JE-D9d" kind="show" id="9QK-Go-J70"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="okS-cq-IqF" userLabel="Cancel_TFimg_Img">
@@ -719,6 +699,7 @@
                     <navigationItem key="navigationItem" id="2SI-Wb-wqw"/>
                     <connections>
                         <outlet property="name_Label" destination="qWR-8c-mVh" id="MNY-HA-Xqs"/>
+                        <segue destination="xMC-JE-D9d" kind="show" identifier="go-L-3-2" id="4ss-fb-HGm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q4-I9-Lrr" sceneMemberID="firstResponder"/>
@@ -738,17 +719,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="qNZ-AY-nAG" userLabel="Logo_Whitewood_Img">
-                                <rect key="frame" x="32" y="59" width="350" height="122"/>
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="Fi2-E7-Ww6"/>
                                     <constraint firstAttribute="height" constant="122" id="yOc-Pm-ipT"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Applogo_long" translatesAutoresizingMaskIntoConstraints="NO" id="EFM-eK-GYJ" userLabel="Logo_Applogo_Img">
-                                <rect key="frame" x="32" y="59" width="350" height="122"/>
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="Hqr-ym-mWn" userLabel="Detail_WhiteWood_Img">
-                                <rect key="frame" x="32" y="211" width="350" height="595"/>
+                                <rect key="frame" x="32" y="255" width="350" height="551"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="gOP-na-rSp"/>
                                 </constraints>
@@ -805,7 +786,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="gonext" destination="XhO-67-g3V" eventType="touchUpInside" id="Iuh-Fb-4Jr"/>
-                                    <segue destination="V7q-cV-93o" kind="show" id="Y5n-RN-kDP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -829,6 +809,7 @@
                     <connections>
                         <outlet property="mail_TF" destination="YCC-KE-8K9" id="vW5-f7-EAx"/>
                         <outlet property="pass_TF" destination="owL-xi-IYw" id="4kw-Kq-YLm"/>
+                        <segue destination="V7q-cV-93o" kind="show" identifier="go-L-2-2" id="BqH-2J-e3Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFR-jI-iPH" sceneMemberID="firstResponder"/>
@@ -840,7 +821,7 @@
             <objects>
                 <viewController id="V7q-cV-93o" userLabel="Login_2-2 VC" customClass="Login_2_2_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f4a-IB-PWb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="fgA-tD-XXh" userLabel="Background_Img">
@@ -848,17 +829,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="kJ6-pe-1Qy" userLabel="Logo_Whitewood_Img">
-                                <rect key="frame" x="32" y="15" width="350" height="122"/>
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="122" id="MoQ-tS-WFK"/>
                                     <constraint firstAttribute="width" constant="350" id="fsg-J6-wDb"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Applogo_long" translatesAutoresizingMaskIntoConstraints="NO" id="s60-7h-isv" userLabel="Logo_Applogo_Img">
-                                <rect key="frame" x="32" y="15" width="350" height="122"/>
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="PhT-OE-mml" userLabel="Detail_WhiteWood_Img">
-                                <rect key="frame" x="32" y="167" width="350" height="585"/>
+                                <rect key="frame" x="32" y="255" width="350" height="551"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="Ti1-GG-Dtb"/>
                                 </constraints>
@@ -920,7 +901,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="gonext" destination="V7q-cV-93o" eventType="touchUpInside" id="pS2-fd-QHn"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="86c-03-yfs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-dd-6bh" userLabel="Next_Gonext_Button">
@@ -930,7 +910,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
                                     <action selector="gonext" destination="V7q-cV-93o" eventType="touchUpInside" id="P7d-RD-P01"/>
-                                    <segue destination="SKO-R2-7hI" kind="show" id="JzV-T6-dIl"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="ajG-Ks-gvD" userLabel="Cancel_TFimg_Img">
@@ -978,6 +957,7 @@
                     <navigationItem key="navigationItem" id="zss-uN-RzB"/>
                     <connections>
                         <outlet property="name_Label" destination="PZ0-DC-geG" id="ijl-S1-sUf"/>
+                        <segue destination="SKO-R2-7hI" kind="show" identifier="2-go-L-1-2" id="gf0-f7-49Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3G-zY-Y1Z" sceneMemberID="firstResponder"/>
@@ -3369,11 +3349,228 @@
             </objects>
             <point key="canvasLocation" x="2883" y="4233"/>
         </scene>
+        <!--Login_1-5 VC-->
+        <scene sceneID="fF3-Sh-dZ7">
+            <objects>
+                <viewController id="8tY-CV-QyT" userLabel="Login_1-5 VC" customClass="Login_1_3_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="94G-yz-L99">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="zFM-WW-8zo" userLabel="Background_Img">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="V3f-yL-3L0" userLabel="Logo_Whitewood_Img">
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="1LE-mZ-M7X"/>
+                                    <constraint firstAttribute="height" constant="122" id="NOF-e8-xVa"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Applogo_long" translatesAutoresizingMaskIntoConstraints="NO" id="W1k-Vx-u0I" userLabel="Logo_Applogo_Img">
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="lo0-MN-G9J" userLabel="Detail_WhiteWood_Img">
+                                <rect key="frame" x="32" y="255" width="350" height="551"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="GLx-lJ-YEs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="グループ作成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEl-y5-R4T" userLabel="Detail_グループ作成_Label">
+                                <rect key="frame" x="86" y="291" width="242" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Imz-7F-vU5"/>
+                                    <constraint firstAttribute="height" constant="47" id="Tmd-k6-gKp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCM-Jv-Fzy" userLabel="Detail_任意のグループIDを_Label">
+                                <rect key="frame" x="25" y="386" width="364" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="1wg-mu-PXL"/>
+                                    <constraint firstAttribute="height" constant="47" id="XiP-VD-QaO"/>
+                                </constraints>
+                                <string key="text">任意のグループ名を
+入力してください</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSG-NB-6an" userLabel="Detail_Gonext_Button">
+                                <rect key="frame" x="182" y="725" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
+                                <connections>
+                                    <action selector="gonext" destination="8tY-CV-QyT" eventType="touchUpInside" id="SiK-aS-45a"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="rJd-w4-DOy" userLabel="ID_TFimg_Img">
+                                <rect key="frame" x="52" y="557" width="310" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　グループIDを入力..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apA-7Q-1ol" userLabel="ID_TF">
+                                <rect key="frame" x="101" y="556" width="260" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.2.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h1Q-kx-Qiv" userLabel="ID_Mailimg_Img">
+                                <rect key="frame" x="57" y="562" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jce-8g-nF8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lo0-MN-G9J" firstAttribute="top" secondItem="V3f-yL-3L0" secondAttribute="bottom" constant="30" id="48P-uc-IpO"/>
+                            <constraint firstItem="V3f-yL-3L0" firstAttribute="centerX" secondItem="94G-yz-L99" secondAttribute="centerX" id="Ak7-o5-0j5"/>
+                            <constraint firstItem="W1k-Vx-u0I" firstAttribute="centerX" secondItem="V3f-yL-3L0" secondAttribute="centerX" id="CHh-E3-7Fv"/>
+                            <constraint firstItem="VEl-y5-R4T" firstAttribute="top" secondItem="lo0-MN-G9J" secondAttribute="top" constant="45" id="GQb-mW-s6Y"/>
+                            <constraint firstItem="jce-8g-nF8" firstAttribute="bottom" secondItem="lo0-MN-G9J" secondAttribute="bottom" constant="56" id="H6x-KZ-KC3"/>
+                            <constraint firstItem="W1k-Vx-u0I" firstAttribute="width" secondItem="V3f-yL-3L0" secondAttribute="width" id="ZpK-Q9-8VK"/>
+                            <constraint firstItem="V3f-yL-3L0" firstAttribute="top" secondItem="jce-8g-nF8" secondAttribute="top" constant="15" id="e88-8b-E59"/>
+                            <constraint firstItem="W1k-Vx-u0I" firstAttribute="height" secondItem="V3f-yL-3L0" secondAttribute="height" id="elm-i0-FxO"/>
+                            <constraint firstItem="VEl-y5-R4T" firstAttribute="centerX" secondItem="lo0-MN-G9J" secondAttribute="centerX" id="ire-YB-1q6"/>
+                            <constraint firstItem="lo0-MN-G9J" firstAttribute="centerX" secondItem="94G-yz-L99" secondAttribute="centerX" id="rsE-Ps-Zvs"/>
+                            <constraint firstItem="V3f-yL-3L0" firstAttribute="centerY" secondItem="W1k-Vx-u0I" secondAttribute="centerY" id="xcT-JT-9cZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PuH-Ml-dVD"/>
+                    <connections>
+                        <segue destination="8ur-YS-Lc0" kind="show" identifier="go-L-1-6" id="ehh-Sr-IuQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lf7-OQ-HbP" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2884" y="-777"/>
+        </scene>
+        <!--Login_1-6 VC-->
+        <scene sceneID="Uy2-rx-R1e">
+            <objects>
+                <viewController id="8ur-YS-Lc0" userLabel="Login_1-6 VC" customClass="Login_1_4_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sqZ-km-CcT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="1eR-1f-ubY" userLabel="Background_Img">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="l1b-HF-RVw" userLabel="Logo_Whitewood_Img">
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="122" id="21E-TF-Yjp"/>
+                                    <constraint firstAttribute="width" constant="350" id="CSp-FN-VXF"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Applogo_long" translatesAutoresizingMaskIntoConstraints="NO" id="zDU-BG-bNl" userLabel="Logo_Applogo_Img">
+                                <rect key="frame" x="32" y="103" width="350" height="122"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="5cB-8t-GXx" userLabel="Detail_WhiteWood_Img">
+                                <rect key="frame" x="32" y="255" width="350" height="551"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="3G4-Gx-xeX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-ed-Y8p" userLabel="Detail_リスト共有_Label">
+                                <rect key="frame" x="32" y="255" width="350" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="H4z-d5-UTA"/>
+                                    <constraint firstAttribute="height" constant="47" id="hZD-Pb-BfC"/>
+                                </constraints>
+                                <string key="text">あなたの
+グループID</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="BigTextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="YDU-Jf-cxV" userLabel="Name_BigTFimg_Img">
+                                <rect key="frame" x="52" y="383" width="310" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="rVw-OA-e4l"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GroupID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjg-Hk-ICx" userLabel="Name_Name_Label">
+                                <rect key="frame" x="52" y="383" width="310" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="x4F-G6-4BU" userLabel="Next_TFimg_Img">
+                                <rect key="frame" x="52" y="635" width="310" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXL-Yx-Nyo" userLabel="Next_次へ_Button">
+                                <rect key="frame" x="52" y="635" width="260" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="　次へ">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="gonext" destination="8ur-YS-Lc0" eventType="touchUpInside" id="hlS-i0-vnj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wt-XM-XDG" userLabel="Next_Gonext_Button">
+                                <rect key="frame" x="312" y="635" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
+                                <connections>
+                                    <action selector="gonext" destination="8ur-YS-Lc0" eventType="touchUpInside" id="9ys-ou-Yzc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHW-ms-WUV" userLabel="Detail_共有します_Label">
+                                <rect key="frame" x="55" y="492" width="304" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="JPD-62-06G"/>
+                                    <constraint firstAttribute="width" constant="200" id="tFf-xX-12N"/>
+                                </constraints>
+                                <string key="text">このIDは 他の人が
+同グループに所属する際に
+必要です。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yN2-Ae-GHR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5cB-8t-GXx" firstAttribute="centerX" secondItem="sqZ-km-CcT" secondAttribute="centerX" id="1Yg-hI-vcs"/>
+                            <constraint firstItem="l1b-HF-RVw" firstAttribute="centerX" secondItem="sqZ-km-CcT" secondAttribute="centerX" id="9j0-g2-iw8"/>
+                            <constraint firstItem="3bd-ed-Y8p" firstAttribute="centerX" secondItem="5cB-8t-GXx" secondAttribute="centerX" id="E34-J0-kRd"/>
+                            <constraint firstItem="l1b-HF-RVw" firstAttribute="top" secondItem="yN2-Ae-GHR" secondAttribute="top" constant="15" id="TXc-As-jMS"/>
+                            <constraint firstItem="zDU-BG-bNl" firstAttribute="centerX" secondItem="l1b-HF-RVw" secondAttribute="centerX" id="Wj7-Dz-vOk"/>
+                            <constraint firstItem="5cB-8t-GXx" firstAttribute="top" secondItem="l1b-HF-RVw" secondAttribute="bottom" constant="30" id="ba7-CF-OC1"/>
+                            <constraint firstItem="yN2-Ae-GHR" firstAttribute="bottom" secondItem="5cB-8t-GXx" secondAttribute="bottom" constant="56" id="cwq-eK-7mU"/>
+                            <constraint firstItem="l1b-HF-RVw" firstAttribute="centerY" secondItem="zDU-BG-bNl" secondAttribute="centerY" id="egO-vb-EpN"/>
+                            <constraint firstItem="zDU-BG-bNl" firstAttribute="width" secondItem="l1b-HF-RVw" secondAttribute="width" id="ltT-Af-pSL"/>
+                            <constraint firstItem="zDU-BG-bNl" firstAttribute="height" secondItem="l1b-HF-RVw" secondAttribute="height" id="o2i-8m-Huf"/>
+                            <constraint firstItem="3bd-ed-Y8p" firstAttribute="top" secondItem="5cB-8t-GXx" secondAttribute="top" constant="45" id="yji-Re-BN7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="s9O-gR-Fy6"/>
+                    <connections>
+                        <outlet property="name_Label" destination="sjg-Hk-ICx" id="Zfq-yD-hkj"/>
+                        <segue destination="xMC-JE-D9d" kind="show" identifier="go-L-3-1" id="BEZ-hG-Zb2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Det-7p-T3Z" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3918.8405797101454" y="-777.45535714285711"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9QK-Go-J70"/>
-        <segue reference="pOe-8P-HVy"/>
-        <segue reference="UIa-WZ-QpP"/>
+        <segue reference="BEZ-hG-Zb2"/>
+        <segue reference="x9S-Sf-4ts"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Applogo_long" width="259" height="194"/>
@@ -3398,6 +3595,7 @@
         <image name="list.bullet.circle.fill" catalog="system" width="128" height="121"/>
         <image name="number_2" width="396" height="305"/>
         <image name="numbers_4" width="3788" height="1332"/>
+        <image name="person.2.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="121"/>
