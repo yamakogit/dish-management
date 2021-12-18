@@ -6,18 +6,65 @@
 //
 
 import UIKit
+import Firebase //FB
+import FirebaseAuth
+import FirebaseFirestore
 
-class Login_1_5_ViewController: UIViewController {
+class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var id_TF: UITextField!
+    @IBOutlet weak var groupName_TF: UITextField!
+    
+    var groupName : String = ""
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.hidesBackButton = true
+        
+        groupName_TF.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     
-
+    //TF
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() //キーボードを閉じる
+        
+        groupName = textField.text!
+        print("groupName: \(groupName)")
+            
+        return true //戻り値
+    }
+    
+    
+    //Alert
+    var alertController: UIAlertController!
+    
+    //Alert
+    func alert(title:String, message:String) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true)
+    }
+    
+    
+    
+    @IBAction func gonext() {
+        if groupName == "" {
+            alert(title: "グループ名が\n正しく入力されていません", message: "グループ名を\nもう一度入れ直してください。")
+            print("error: groupName not found")
+            
+        } else {
+            UserDefaults.standard.set(self.groupName, forKey: "groupname")
+            //MARK: ★navigation遷移
+            self.performSegue(withIdentifier: "go-L-1-1", sender: nil)
+            
+        }
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

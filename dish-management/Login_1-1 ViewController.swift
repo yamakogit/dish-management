@@ -29,36 +29,39 @@ class Login_1_1_ViewController: UIViewController {
     }
     
     @IBAction func adultMode() {
-        mode = true
         
-        
-        
-        db.auth().onAuthStateChanged(async (user) -> {
-            if (!user) {
-                
-            } else {
-        var ref: DocumentReference? = nil
-    
-        ref = db.collection("AdaltUsers").document(user.uid).setData([
-            "name" : username
-        ]) { err in
-            if let err = err {
-                //失敗
-                
-            } else {
-            //成功
-                print("ID: \(ref!.documentID)")
-                self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
+            
+            guard let user = user else {
+                return
+            }
+            
+            let ref = self.db.collection("AdaltUsers")
+            
+            ref.document(user.uid).setData([
+                "name" : self.username
+            ]) { err in
+                if let err = err {
+                    //失敗
+                    
+                } else {
+                    //成功
+                    print("succeed")
+                    self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
+                }
             }
         }
         
+    }
         
         
         
         
         
 //        //MARK: ★navigation遷移
-    }
+            
+            
+    
     
     @IBAction func childMode() {
         mode = false

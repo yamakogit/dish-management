@@ -613,7 +613,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWR-8c-mVh" userLabel="Name_Name_Label">
                                 <rect key="frame" x="52" y="383" width="310" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3352,7 +3352,7 @@
         <!--Login_1-5 VC-->
         <scene sceneID="fF3-Sh-dZ7">
             <objects>
-                <viewController id="8tY-CV-QyT" userLabel="Login_1-5 VC" customClass="Login_1_3_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8tY-CV-QyT" userLabel="Login_1-5 VC" customClass="Login_1_5_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="94G-yz-L99">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3412,7 +3412,7 @@
                                 <rect key="frame" x="52" y="557" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　グループIDを入力..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apA-7Q-1ol" userLabel="ID_TF">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="　グループ名を入力..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apA-7Q-1ol" userLabel="ID_TF">
                                 <rect key="frame" x="101" y="556" width="260" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -3442,6 +3442,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="PuH-Ml-dVD"/>
                     <connections>
+                        <outlet property="groupName_TF" destination="apA-7Q-1ol" id="fEQ-dP-cTG"/>
                         <segue destination="8ur-YS-Lc0" kind="show" identifier="go-L-1-6" id="ehh-Sr-IuQ"/>
                     </connections>
                 </viewController>
@@ -3498,7 +3499,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GroupID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjg-Hk-ICx" userLabel="Name_Name_Label">
                                 <rect key="frame" x="52" y="383" width="310" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
