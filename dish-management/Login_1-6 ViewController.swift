@@ -13,6 +13,8 @@ import FirebaseAuth
 class Login_1_6_ViewController: UIViewController {
     @IBOutlet var groupID_Label: UILabel!
     
+    var activityIndicatorView = UIActivityIndicatorView()
+    
     var groupname: String = ""
     var groupID: String = ""
     let db = Firestore.firestore()
@@ -23,6 +25,13 @@ class Login_1_6_ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()  //AIV
         
         
         
@@ -41,39 +50,55 @@ class Login_1_6_ViewController: UIViewController {
         
         
         
-        var ref: DocumentReference? = nil
-        ref = db.collection("group").addDocument(data:
-        ["groupID" : "\(groupID)",
-         "groupName" : "\(groupname)",
-         "member" : ""])
         
         
-//        Auth.auth().addStateDidChangeListener{ (auth, user) in
-//
-//            guard let user = user else {
-//                return
-//            }
-//
-//            let ref = self.db.collection("AdaltUsers")
-//
-//            ref.document(user.uid).setData([
-//                "name" : self.username
-//            ]) { err in
-//                if let err = err {
-//                    //失敗
-//
-//                } else {
-//                    //成功
-//                    print("succeed")
-//                    self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
-//                }
-//            }
-//        }
         
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
+
+            guard let user = user else {
+                return
+            }
+            
+            var ref: DocumentReference? = nil
+            ref = self.db.collection("Group").addDocument(data:
+                                                            ["groupID" : "\(self.groupID)",
+                                                             "groupName" : "\(self.groupname)",
+                                                             "member" : "\(user.uid)"])
+            
+
+            let ref2 = self.db.collection("AdaltUsers")
+
+            ref2.document(user.uid).setData([
+                "groupUid" : "ここにgroupで作ったuidを入れる"
+            ])
+            
+            
+            { err in
+                if let err = err {
+                    //失敗
+
+                } else {
+                    //成功
+                    print("succeed")
+                    self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
+                }
+            }
+        }
+        
+        activityIndicatorView.stopAnimating()  //AIV
+        activityIndicatorView.isHidden = true
         
     }
     
 
+    
+    
+    
+    
+    @IBAction func gonext() {
+        
+    }
+    
     /*
     // MARK: - Navigation
 

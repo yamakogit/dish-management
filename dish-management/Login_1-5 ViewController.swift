@@ -58,7 +58,7 @@ class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
         } else {
             UserDefaults.standard.set(self.groupName, forKey: "groupname")
             //MARK: ★navigation遷移
-            self.performSegue(withIdentifier: "go-L-1-1", sender: nil)
+            self.performSegue(withIdentifier: "go-L-1-6", sender: nil)
             
         }
         

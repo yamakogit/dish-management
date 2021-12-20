@@ -17,7 +17,7 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var user_TF :UITextField!
     @IBOutlet var pass_TF :UITextField!
     
-    var activityIndicatorView = UIActivityIndicatorView()
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     var emailadress :String = ""
     var username :String = ""
@@ -38,6 +38,9 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         user_TF.tag = 1
         pass_TF.tag = 2
         
+        pass_TF.isSecureTextEntry = true
+     
+        //AIV
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
@@ -94,13 +97,13 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             
-            activityIndicatorView.startAnimating()
+            activityIndicatorView.startAnimating()  //AIV
             
             Auth.auth().createUser (withEmail: emailadress, password: pass) {
                 authResult, error in
             print("succeed: login")
                 
-                self.activityIndicatorView.startAnimating()
+                self.activityIndicatorView.stopAnimating()  //AIV
                 
                 UserDefaults.standard.set(self.username, forKey: "username")
                 

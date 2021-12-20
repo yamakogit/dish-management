@@ -3453,7 +3453,7 @@
         <!--Login_1-6 VC-->
         <scene sceneID="Uy2-rx-R1e">
             <objects>
-                <viewController id="8ur-YS-Lc0" userLabel="Login_1-6 VC" customClass="Login_1_4_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8ur-YS-Lc0" userLabel="Login_1-6 VC" customClass="Login_1_6_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sqZ-km-CcT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3490,13 +3490,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="BigTextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="YDU-Jf-cxV" userLabel="Name_BigTFimg_Img">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="BigTextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="YDU-Jf-cxV" userLabel="GroupID_BigTFimg_Img">
                                 <rect key="frame" x="52" y="383" width="310" height="79"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="rVw-OA-e4l"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GroupID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjg-Hk-ICx" userLabel="Name_Name_Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GroupID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjg-Hk-ICx" userLabel="GroupID_GroupID_Label">
                                 <rect key="frame" x="52" y="383" width="310" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -3560,6 +3560,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="s9O-gR-Fy6"/>
                     <connections>
+                        <outlet property="groupID_Label" destination="sjg-Hk-ICx" id="jEZ-E9-qeu"/>
                         <outlet property="name_Label" destination="sjg-Hk-ICx" id="Zfq-yD-hkj"/>
                         <segue destination="xMC-JE-D9d" kind="show" identifier="go-L-3-1" id="BEZ-hG-Zb2"/>
                     </connections>
