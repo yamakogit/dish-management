@@ -59,17 +59,18 @@ class Login_1_6_ViewController: UIViewController {
                 return
             }
             
+            //ここでGroupコレクションを作成
             var ref: DocumentReference? = nil
-            ref = self.db.collection("Group").addDocument(data:
-                                                            ["groupID" : "\(self.groupID)",
-                                                             "groupName" : "\(self.groupname)",
-                                                             "member" : "\(user.uid)"])
+            ref = self.db.collection("Group").addDocument(data:  //ここでgroupのuidをランダム作成
+                                                            ["groupID" : "\(self.groupID)", //groupIDを保存
+                                                             "groupName" : "\(self.groupname)", //group名を保存
+                                                             "member" : "\(user.uid)"]) //userのuidをgroupコレクションに保存
             
 
             let ref2 = self.db.collection("AdaltUsers")
 
-            ref2.document(user.uid).setData([
-                "groupUid" : "ここにgroupで作ったuidを入れる"
+            ref2.document(user.uid).setData([  //作成済のAdultUsersコレクションのAuthのuidに...
+                "groupUid" : "ここにgroupで作ったuidを入れる"  //上で作成したgroupのuidをuserのuidに保存
             ])
             
             

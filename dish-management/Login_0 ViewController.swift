@@ -46,6 +46,10 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         activityIndicatorView.color = .darkGray
         view.addSubview(activityIndicatorView)
         
+        mail_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        user_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        pass_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        
         
         // Do any additional setup after loading the view.
     }
@@ -69,6 +73,27 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         }
         return true //戻り値
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.tag == 0 {
+        emailadress = textField.text!
+        print("星emailadress: \(emailadress)")
+            
+        } else if textField.tag == 1 {
+            username = textField.text!
+            print("星username: \(username)")
+            
+        } else if textField.tag == 2 {
+            pass = textField.text!
+            print("星password: \(pass)")
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     //Alert
     var alertController: UIAlertController!
@@ -104,6 +129,7 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
             print("succeed: login")
                 
                 self.activityIndicatorView.stopAnimating()  //AIV
+                self.activityIndicatorView.isHidden = true
                 
                 UserDefaults.standard.set(self.username, forKey: "username")
                 

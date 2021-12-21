@@ -17,24 +17,24 @@ class Login_1_2_ViewController: UIViewController {
     }
     
     
-    @IBAction func share() {
+    @IBAction func New() {
         
         //コード
         
         
         //MARK: ★navigation遷移
-        //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)
+                self.performSegue(withIdentifier: "go-L-1-3", sender: nil)
         
     }
     
     
-    @IBAction func notShare() {
+    @IBAction func Already() {
         
         //コード
         
         
         //MARK: ★navigation遷移
-        //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)
+                self.performSegue(withIdentifier: "go-L-1-5", sender: nil)
         
     }
     
