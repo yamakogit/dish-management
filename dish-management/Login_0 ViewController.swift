@@ -59,6 +59,10 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() //キーボードを閉じる
         
+        return true //戻り値
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
         if textField.tag == 0 {
         emailadress = textField.text!
         print("emailadress: \(emailadress)")
@@ -70,22 +74,6 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         } else if textField.tag == 2 {
             pass = textField.text!
             print("password: \(pass)")
-        }
-        return true //戻り値
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField.tag == 0 {
-        emailadress = textField.text!
-        print("星emailadress: \(emailadress)")
-            
-        } else if textField.tag == 1 {
-            username = textField.text!
-            print("星username: \(username)")
-            
-        } else if textField.tag == 2 {
-            pass = textField.text!
-            print("星password: \(pass)")
         }
     }
     

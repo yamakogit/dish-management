@@ -29,7 +29,7 @@ class Login_2_2_ViewController: UIViewController {
     }
     
     @IBAction func cancel() {
-        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     

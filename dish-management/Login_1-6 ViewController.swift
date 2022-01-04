@@ -18,6 +18,7 @@ class Login_1_6_ViewController: UIViewController {
     var groupname: String = ""
     var groupID: String = ""
     let db = Firestore.firestore()
+    var checkNumber: Int = 0
     
     
     override func viewDidLoad() {
@@ -35,18 +36,16 @@ class Login_1_6_ViewController: UIViewController {
         
         
         
-        let groupNumberID: Int = Int.random(in: 1000...9999)
+        let groupNumberID: Int = Int.random(in: 100000...999999)
         let groupnameload = UserDefaults.standard.string(forKey: "groupname") ?? "デフォルト値"
         groupname = groupnameload
         
-        let groupnamefirst = groupname.startIndex
-        let groupnameend = groupname.endIndex
         
-        groupID = "\(groupnamefirst)\(groupnameend)\(groupNumberID)"
+        groupID = "\(groupNumberID)"
         
         groupID_Label.text = groupID
         
-        
+        print ("groupID: \(groupID)")
         
         
         
@@ -60,17 +59,20 @@ class Login_1_6_ViewController: UIViewController {
             }
             
             //ここでGroupコレクションを作成
-            var ref: DocumentReference? = nil
-            ref = self.db.collection("Group").addDocument(data:  //ここでgroupのuidをランダム作成
+            let ref = self.db.collection("Group")
+            
+            let createduid = self.db.collection("Group").document().documentID
+            print("createduid: \(createduid)")
+            ref.document(createduid).setData( //ここでgroupのuidをランダム作成
                                                             ["groupID" : "\(self.groupID)", //groupIDを保存
                                                              "groupName" : "\(self.groupname)", //group名を保存
                                                              "member" : "\(user.uid)"]) //userのuidをgroupコレクションに保存
             
 
             let ref2 = self.db.collection("AdaltUsers")
-
+            
             ref2.document(user.uid).setData([  //作成済のAdultUsersコレクションのAuthのuidに...
-                "groupUid" : "ここにgroupで作ったuidを入れる"  //上で作成したgroupのuidをuserのuidに保存
+                "groupUid" : "\(createduid)"  //上で作成したgroupのuidをuserのuidに保存
             ])
             
             
@@ -81,7 +83,7 @@ class Login_1_6_ViewController: UIViewController {
                 } else {
                     //成功
                     print("succeed")
-                    self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
+                    self.checkNumber = 1
                 }
             }
         }
@@ -97,7 +99,11 @@ class Login_1_6_ViewController: UIViewController {
     
     
     @IBAction func gonext() {
-        
+        if checkNumber == 1 {
+            self.performSegue(withIdentifier: "go-L-3-1", sender: nil)
+        } else {
+            //失敗している
+        }
     }
     
     /*

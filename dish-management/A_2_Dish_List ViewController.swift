@@ -36,6 +36,12 @@ class A_2_Dish_List_ViewController: UIViewController/*, UITableViewDelegate, UIT
       */
     
 
+    @IBAction func addDishButton() {
+        self.performSegue(withIdentifier: "go-A2DA", sender: nil)
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

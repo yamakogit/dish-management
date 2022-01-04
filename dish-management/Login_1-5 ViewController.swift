@@ -24,6 +24,8 @@ class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
         
         groupName_TF.delegate = self
         
+        groupName_TF.addTarget(self, action: #selector(Login_1_5_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -31,11 +33,18 @@ class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() //キーボードを閉じる
         
-        groupName = textField.text!
-        print("groupName: \(groupName)")
-            
         return true //戻り値
     }
+    
+    
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        groupName = textField.text!
+        print("groupName: \(groupName)")
+        
+    }
+    
     
     
     //Alert

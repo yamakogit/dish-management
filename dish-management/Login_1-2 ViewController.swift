@@ -23,7 +23,7 @@ class Login_1_2_ViewController: UIViewController {
         
         
         //MARK: ★navigation遷移
-                self.performSegue(withIdentifier: "go-L-1-3", sender: nil)
+                self.performSegue(withIdentifier: "go-L-1-5", sender: nil)
         
     }
     
@@ -34,7 +34,7 @@ class Login_1_2_ViewController: UIViewController {
         
         
         //MARK: ★navigation遷移
-                self.performSegue(withIdentifier: "go-L-1-5", sender: nil)
+                self.performSegue(withIdentifier: "go-L-1-3", sender: nil)
         
     }
     

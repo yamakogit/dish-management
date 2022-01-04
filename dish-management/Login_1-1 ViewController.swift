@@ -47,7 +47,7 @@ class Login_1_1_ViewController: UIViewController {
                 } else {
                     //成功
                     print("succeed")
-                    self.performSegue(withIdentifier: "1-go-L-1-2", sender: nil)
+                    self.performSegue(withIdentifier: "go-L-1-2", sender: nil)
                 }
             }
         }

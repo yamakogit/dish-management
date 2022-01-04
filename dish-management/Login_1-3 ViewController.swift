@@ -10,7 +10,7 @@ import Firebase //FB
 
 class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var id_TF: UITextField!
+    @IBOutlet weak var groupID_TF: UITextField!
     
     var groupID :String = ""
 
@@ -20,7 +20,8 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.hidesBackButton = true
         
         //TF
-        id_TF.delegate = self
+        groupID_TF.delegate = self
+        groupID_TF.addTarget(self, action: #selector(Login_1_3_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         
         // Do any additional setup after loading the view.
@@ -32,10 +33,20 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder() //キーボードを閉じる
         
         groupID = textField.text!
-        print("sharedEmailadress: \(groupID)")
+        print("sharedEmailadress: \(groupID)")  //TF
         
         return true //戻り値
     }
+    
+    //TF
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        groupID = textField.text!
+        print("groupID: \(groupID)")
+            
+    }
+    
+    
     
     
     //Alert

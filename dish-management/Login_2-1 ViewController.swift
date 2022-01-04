@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import Firebase //FB
+import FirebaseAuth
+import FirebaseFirestore
 
 class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var mail_TF: UITextField!
     @IBOutlet weak var pass_TF: UITextField!
+    
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     var emailadress :String = ""
     var pass :String = ""
@@ -27,6 +32,16 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
         mail_TF.tag = 0
         pass_TF.tag = 1
         
+        pass_TF.isSecureTextEntry = true
+     
+        //AIV
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        view.addSubview(activityIndicatorView)
+        
+        mail_TF.addTarget(self, action: #selector(Login_2_1_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        pass_TF.addTarget(self, action: #selector(Login_2_1_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         // Do any additional setup after loading the view.
     }
     
@@ -34,16 +49,22 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() //キーボードを閉じる
         
+        return true //戻り値
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
         if textField.tag == 0 {
         emailadress = textField.text!
-        print("sharedEmailadress: \(emailadress)")
+        print("emailadress: \(emailadress)")
             
         } else if textField.tag == 1 {
             pass = textField.text!
-            print("sharedPassword: \(pass)")
+            print("password: \(pass)")
         }
-        return true //戻り値
+            
     }
+    
     
     
     //Alert
@@ -58,6 +79,36 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func gonext() {
+        if emailadress == "" {
+            alert(title: "メールアドレスが\n正しく入力されていません", message: "メールアドレスを\nもう一度入れ直してください。")
+            print("error: emailadress not found")
+            
+        } else if pass == "" {
+            alert(title: "パスワードが\n正しく入力されていません", message: "パスワードを\nもう一度入れ直してください。")
+            print("error: password not found")
+            
+        } else {
+            
+            activityIndicatorView.startAnimating()  //AIV
+            
+            Auth.auth().signIn (withEmail: emailadress, password: pass) {
+                [weak self] authResult, error in
+                
+                guard let strongSelf = self else { return }
+                
+                
+            print("succeed: login")
+                //MARK: ★?,!不要？
+                self?.activityIndicatorView.stopAnimating()  //AIV
+                self?.activityIndicatorView.isHidden = true
+                
+
+                
+                //MARK: ★navigation遷移
+                self?.performSegue(withIdentifier: "go-L-2-2", sender: nil)
+                
+            }
+        }
         
     }
 
