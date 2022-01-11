@@ -17,6 +17,8 @@ class Login_1_6_ViewController: UIViewController {
     
     var groupname: String = ""
     var groupID: String = ""
+    var username: String = ""
+    var mode: String = ""
     let db = Firestore.firestore()
     var checkNumber: Int = 0
     
@@ -36,12 +38,19 @@ class Login_1_6_ViewController: UIViewController {
         
         
         
-        let groupNumberID: Int = Int.random(in: 100000...999999)
+        let groupIDNumber: Int = Int.random(in: 100000...999999)
+        
+        let groupIDLetterArray = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        let groupIDLetter1 = groupIDLetterArray [Int.random(in: 0...51)]
+        let groupIDLetter2 = groupIDLetterArray [Int.random(in: 0...51)]
         let groupnameload = UserDefaults.standard.string(forKey: "groupname") ?? "デフォルト値"
+        let usernameload = UserDefaults.standard.string(forKey: "username") ?? "デフォルト値"
+        let modeload = UserDefaults.standard.string(forKey: "mode") ?? "デフォルト値"
         groupname = groupnameload
+        username = usernameload
+        mode = modeload
         
-        
-        groupID = "\(groupNumberID)"
+        groupID = "\(groupIDLetter1)\(groupIDLetter2)\(groupIDNumber)"
         
         groupID_Label.text = groupID
         
@@ -68,11 +77,13 @@ class Login_1_6_ViewController: UIViewController {
                                                              "groupName" : "\(self.groupname)", //group名を保存
                                                              "member" : "\(user.uid)"]) //userのuidをgroupコレクションに保存
             
-
-            let ref2 = self.db.collection("AdaltUsers")
+            
+            
+            let ref2 = self.db.collection("\(self.mode)")
             
             ref2.document(user.uid).setData([  //作成済のAdultUsersコレクションのAuthのuidに...
-                "groupUid" : "\(createduid)"  //上で作成したgroupのuidをuserのuidに保存
+                "groupUid" : "\(createduid)",  //上で作成したgroupのuidをuserのuidに保存
+                "username" : "\(self.username)"
             ])
             
             

@@ -12,7 +12,7 @@
         <!--Navigation Controller-->
         <scene sceneID="M5I-8G-9mv">
             <objects>
-                <navigationController id="Qj9-IG-WbY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DefaultVC" id="Qj9-IG-WbY" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="215-1p-Db3">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -968,7 +968,7 @@
         <!--Login_3 VC-->
         <scene sceneID="hv2-4D-EEc">
             <objects>
-                <viewController id="xMC-JE-D9d" userLabel="Login_3 VC" customClass="Login_3_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xMC-JE-D9d" userLabel="Login_3 VC" customClass="Login_3_ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6IE-NG-Fpi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1029,12 +1029,18 @@
                                 <buttonConfiguration key="configuration" style="plain" title="　使い方を見る">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="goInstruction_Button" destination="xMC-JE-D9d" eventType="touchUpInside" id="C80-vd-TCJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdd-pz-GyT" userLabel="Inst_Gonext_Button">
                                 <rect key="frame" x="312" y="567" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
+                                <connections>
+                                    <action selector="goInstruction_Button" destination="xMC-JE-D9d" eventType="touchUpInside" id="Ge5-Gc-64S"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-Tg-H6w" userLabel="Use_TFimg_Img">
                                 <rect key="frame" x="51" y="658" width="310" height="50"/>
@@ -1048,12 +1054,18 @@
                                 <buttonConfiguration key="configuration" style="plain" title="　早速使い始める">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="use_Button" destination="xMC-JE-D9d" eventType="touchUpInside" id="uPL-4c-8Cl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezA-CL-DsL" userLabel="Use_Gonext_Button">
                                 <rect key="frame" x="312" y="658" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
+                                <connections>
+                                    <action selector="use_Button" destination="xMC-JE-D9d" eventType="touchUpInside" id="6yo-rY-t2P"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tMa-1T-nad"/>
@@ -1081,7 +1093,7 @@
         <!--A_TabBar VC-->
         <scene sceneID="wRv-nr-jXH">
             <objects>
-                <tabBarController id="zS3-ah-RlN" userLabel="A_TabBar VC" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="AdultVC" id="zS3-ah-RlN" userLabel="A_TabBar VC" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q2D-aw-Il2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1542,6 +1554,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="変更">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="changeUsername_Button" destination="704-qR-kDC" eventType="touchUpInside" id="Lre-Rn-tbo"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="bRb-lA-gIb" userLabel="User_Line_Img">
                                                 <rect key="frame" x="32" y="125" width="350" height="4"/>
@@ -1552,7 +1567,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="fKZ-5n-Q8F" userLabel="User_TFImg_Img">
                                                 <rect key="frame" x="38" y="137" width="338" height="49"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="太郎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRI-Xl-G7K" userLabel="User_太郎_Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="太郎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRI-Xl-G7K" userLabel="User_Username_Label">
                                                 <rect key="frame" x="38" y="137" width="338" height="49"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -1582,7 +1597,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TextFieldImg" translatesAutoresizingMaskIntoConstraints="NO" id="dyF-hZ-UOz" userLabel="Group_TFImg_Img">
                                                 <rect key="frame" x="38" y="259" width="338" height="49"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="太郎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQz-Dg-EI0" userLabel="Group_~~8392_Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ax786934" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQz-Dg-EI0" userLabel="Group_GroupID_Label">
                                                 <rect key="frame" x="38" y="259" width="338" height="49"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -1619,7 +1634,7 @@
                                                     <constraint firstAttribute="width" secondItem="YKa-za-WUM" secondAttribute="height" multiplier="1:1" id="nJc-Pp-fOb"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子供モード" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lla-vz-u5d" userLabel="Mode_〇〇モード_Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子供モード" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lla-vz-u5d" userLabel="Mode_Mode_Label">
                                                 <rect key="frame" x="131" y="381" width="152" height="49"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="152" id="fYj-dH-pDp"/>
@@ -1726,6 +1741,9 @@
                                                 <rect key="frame" x="32" y="730" width="350" height="46"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="instruction_Button" destination="704-qR-kDC" eventType="touchUpInside" id="rkW-ZX-2X6"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="1X8-Zj-UWM" userLabel="Logout_WhiteWood_Img">
                                                 <rect key="frame" x="32" y="796" width="350" height="46"/>
@@ -1749,6 +1767,9 @@
                                                 <rect key="frame" x="32" y="796" width="350" height="46"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="logout_Button" destination="704-qR-kDC" eventType="touchUpInside" id="N73-Qq-AD3"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1894,6 +1915,12 @@
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="946"/>
+                    <connections>
+                        <outlet property="groupID_Label" destination="nQz-Dg-EI0" id="ROr-Ho-Aud"/>
+                        <outlet property="mode_Label" destination="lla-vz-u5d" id="yDt-8i-0OV"/>
+                        <outlet property="tableView" destination="x3Y-c2-WLx" id="UHz-3T-bms"/>
+                        <outlet property="username_Label" destination="wRI-Xl-G7K" id="C1Z-4o-oha"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x3V-9j-3qq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2766,7 +2793,7 @@
         <!--C_TabBar VC-->
         <scene sceneID="Hcw-S2-igK">
             <objects>
-                <tabBarController id="pW5-Eh-DXE" userLabel="C_TabBar VC" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ChildVC" id="pW5-Eh-DXE" userLabel="C_TabBar VC" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="agN-GJ-52y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

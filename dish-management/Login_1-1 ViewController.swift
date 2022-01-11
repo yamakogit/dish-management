@@ -24,34 +24,12 @@ class Login_1_1_ViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
         
-        let usernameload = UserDefaults.standard.string(forKey: "username") ?? "デフォルト値"
-        username = usernameload
     }
     
     @IBAction func adultMode() {
         
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-            
-            guard let user = user else {
-                return
-            }
-            
-            let ref = self.db.collection("AdaltUsers")
-            
-            ref.document(user.uid).setData([
-                "name" : self.username
-            ]) { err in
-                if let err = err {
-                    //失敗
-                    
-                } else {
-                    //成功
-                    print("succeed")
-                    self.performSegue(withIdentifier: "go-L-1-2", sender: nil)
-                }
-            }
-        }
-        
+        UserDefaults.standard.set("AdultUsers", forKey: "mode")
+        self.performSegue(withIdentifier: "go-L-1-2", sender: nil)
     }
         
         
@@ -64,8 +42,9 @@ class Login_1_1_ViewController: UIViewController {
     
     
     @IBAction func childMode() {
-        mode = false
         
+        UserDefaults.standard.set("ChildUsers", forKey: "mode")
+        self.performSegue(withIdentifier: "go-L-1-2", sender: nil)
         
         //MARK: ★navigation遷移
         //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)

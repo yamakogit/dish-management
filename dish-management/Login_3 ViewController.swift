@@ -16,7 +16,15 @@ class Login_3_ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func goInstruction_Button() {
+        performSegue(withIdentifier: "AdultVC", sender: nil)
+    }
+    
+    @IBAction func use_Button() {
+        
+    }
 
+    
     /*
     // MARK: - Navigation
 

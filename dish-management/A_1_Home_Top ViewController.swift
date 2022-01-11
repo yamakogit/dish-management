@@ -36,11 +36,11 @@ class A_1_Home_Top_ViewController: UIViewController/*, UITableViewDelegate, UITa
     
     
     @IBAction func today_Button() {
-        
+        self.tabBarController?.selectedIndex = 1
     }
     
     @IBAction func current_Button() {
-        
+        self.tabBarController?.selectedIndex = 1
     }
     
     @IBAction func setting_Button() {
