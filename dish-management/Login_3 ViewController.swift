@@ -17,7 +17,8 @@ class Login_3_ViewController: UIViewController {
     }
     
     @IBAction func goInstruction_Button() {
-        performSegue(withIdentifier: "AdultVC", sender: nil)
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AdultVC") as! A_1_Home_Top_ViewController
+        self.present(nextVC, animated: true, completion: nil)
     }
     
     @IBAction func use_Button() {
