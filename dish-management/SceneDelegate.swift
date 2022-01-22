@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,22 +20,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: scene as! UIWindowScene)
-        self.window = window
-        window.makeKeyAndVisible()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let modeload = UserDefaults.standard.string(forKey: "mode") ?? "デフォルト値"
+//        let window = UIWindow(windowScene: scene as! UIWindowScene)
+//        self.window = window
+//        window.makeKeyAndVisible()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        Auth.auth().addStateDidChangeListener{ (auth, user) in
+//
+//            guard let user = user else {
+//                return
+//            }
+//            if user.uid != "" {
+//                let vc = storyboard.instantiateViewController(identifier:"DefaultVC")
+//                window.rootViewController = vc
+//            } else {
+//                let vc = storyboard.instantiateViewController(identifier:"AdultVC")
+//                window.rootViewController = vc
+//            }
+//
+//        }
         
-        if modeload == "AdultUsers" {
-            let vc = storyboard.instantiateViewController(identifier:"AdultVC")
-            window.rootViewController = vc
-        } else if modeload == "ChildUsers" {
-            let vc = storyboard.instantiateViewController(identifier:"ChildVC")
-            window.rootViewController = vc
-        } else {
-            let vc = storyboard.instantiateViewController(identifier:"DefaultVC")
-            window.rootViewController = vc
-        }
+        
+        
+        
+//            let vc = storyboard.instantiateViewController(identifier:"ChildVC")
+//            window.rootViewController = vc
+        
+            
         
         
         

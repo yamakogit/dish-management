@@ -12,7 +12,8 @@
 		E136CCEC27523D0B00F45887 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E136CCEB27523D0B00F45887 /* FirebaseFirestore */; };
 		E14C034D2764BB1B00E8BC9F /* Login_1-5 ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C034C2764BB1B00E8BC9F /* Login_1-5 ViewController.swift */; };
 		E14C034F2764BB2B00E8BC9F /* Login_1-6 ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C034E2764BB2B00E8BC9F /* Login_1-6 ViewController.swift */; };
-		E1881285275B7D7200CF48BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1881284275B7D7200CF48BD /* GoogleService-Info.plist */; };
+		E1B48D3127957E6700EA682A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1B48D3027957E6700EA682A /* GoogleService-Info.plist */; };
+		E1B48D332798DAD100EA682A /* Tabbar ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B48D322798DAD100EA682A /* Tabbar ViewController.swift */; };
 		E1F00FB8272D4F0300F1C3FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F00FB7272D4F0300F1C3FA /* AppDelegate.swift */; };
 		E1F00FBA272D4F0300F1C3FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F00FB9272D4F0300F1C3FA /* SceneDelegate.swift */; };
 		E1F00FBF272D4F0300F1C3FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F00FBD272D4F0300F1C3FA /* Main.storyboard */; };
@@ -39,7 +40,8 @@
 /* Begin PBXFileReference section */
 		E14C034C2764BB1B00E8BC9F /* Login_1-5 ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login_1-5 ViewController.swift"; sourceTree = "<group>"; };
 		E14C034E2764BB2B00E8BC9F /* Login_1-6 ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login_1-6 ViewController.swift"; sourceTree = "<group>"; };
-		E1881284275B7D7200CF48BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E1B48D3027957E6700EA682A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E1B48D322798DAD100EA682A /* Tabbar ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tabbar ViewController.swift"; sourceTree = "<group>"; };
 		E1F00FB4272D4F0300F1C3FA /* dish-management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dish-management.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F00FB7272D4F0300F1C3FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1F00FB9272D4F0300F1C3FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,10 +121,11 @@
 				E1FC511D2753096C00E4C761 /* A_3_Send_1 ViewController.swift */,
 				E1FC511F2753099C00E4C761 /* C_1_Menu_Top ViewController.swift */,
 				E1FC5121275309A900E4C761 /* C_1_Menu_Setting ViewController.swift */,
+				E1B48D322798DAD100EA682A /* Tabbar ViewController.swift */,
 				E1F00FBD272D4F0300F1C3FA /* Main.storyboard */,
 				E1F00FC2272D4F0900F1C3FA /* LaunchScreen.storyboard */,
 				E1F00FC5272D4F0900F1C3FA /* Info.plist */,
-				E1881284275B7D7200CF48BD /* GoogleService-Info.plist */,
+				E1B48D3027957E6700EA682A /* GoogleService-Info.plist */,
 			);
 			path = "dish-management";
 			sourceTree = "<group>";
@@ -194,7 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1F00FC4272D4F0900F1C3FA /* LaunchScreen.storyboard in Resources */,
-				E1881285275B7D7200CF48BD /* GoogleService-Info.plist in Resources */,
+				E1B48D3127957E6700EA682A /* GoogleService-Info.plist in Resources */,
 				E1F00FC1272D4F0900F1C3FA /* Assets.xcassets in Resources */,
 				E1F00FBF272D4F0300F1C3FA /* Main.storyboard in Resources */,
 			);
@@ -215,6 +218,7 @@
 				E1FC511C2753092900E4C761 /* A_2_Dish_Add ViewController.swift in Sources */,
 				E1FC51202753099C00E4C761 /* C_1_Menu_Top ViewController.swift in Sources */,
 				E1FC510C2753081300E4C761 /* Login_1-4 ViewController.swift in Sources */,
+				E1B48D332798DAD100EA682A /* Tabbar ViewController.swift in Sources */,
 				E1FC5116275308CF00E4C761 /* A_1_Home_Setting ViewController.swift in Sources */,
 				E1FC5106275307B200E4C761 /* Login_1-1 ViewController.swift in Sources */,
 				E1F00FB8272D4F0300F1C3FA /* AppDelegate.swift in Sources */,

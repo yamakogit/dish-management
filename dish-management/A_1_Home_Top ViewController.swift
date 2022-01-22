@@ -32,6 +32,12 @@ class A_1_Home_Top_ViewController: UIViewController/*, UITableViewDelegate, UITa
         */
         
         // Do any additional setup after loading the view.
+        
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //↓スワイプ 戻る 無効化
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        //戻るボタン 削除
+//        self.navigationItem.hidesBackButton = true
     }
     
     

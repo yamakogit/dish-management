@@ -31,22 +31,38 @@ class A_1_Home_Setting_ViewController: UIViewController {
         Auth.auth().addStateDidChangeListener{ (auth, user) in
 
             guard let user = user else {
+                
                 return
             }
             
             self.userUid = user.uid
             
+            /*
+            self.db.collection("AdultUsers").document(self.userUid).getDocument { (document, error) in
+                
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing: ))
+                    print("ここまで来ました")
+                    print(dataDescription)
+                }
+                */
+            
+            
+            print("ここまで①")
+            print(self.userUid)
             //ここでGroupコレクションを作成
 //            user.uid
             self.db.collection("AdultUsers").document(self.userUid).getDocument { (snap, error) in
                 if let error = error {
                     //失敗
                     print (error)
-                    
+                    print("ここまで②　")
                 } else {
+                    print("ここまで③")
                 guard let data = snap?.data() else { return }
                     self.groupUid = data["groupUid"] as! String
                     self.username = data["username"] as! String
+                    print("ここまで④")
                 }
             }
             
@@ -65,9 +81,7 @@ class A_1_Home_Setting_ViewController: UIViewController {
             self.groupID_Label.text = self.groupID
             
             
-            
         }
-
         // Do any additional setup after loading the view.
     }
     

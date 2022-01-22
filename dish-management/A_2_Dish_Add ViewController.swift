@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextViewDelegate {
 
@@ -19,12 +21,16 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     let createdDate_Formatter = DateFormatter()  //DP
     
+    let db = Firestore.firestore()
+    
     var dishname: String = ""
     var position: String = ""
     var memoText: String = ""
     var createdDate: String = ""
     var vaildDays: String = ""
     var dishImg: UIImage = UIImage(named: "Applogo_long")!
+    
+    var userUid: String = ""
     
     
     let vaildDays_Array = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
@@ -146,6 +152,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     //PickerViewのRowが選択されたときの挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
             vaildDays = vaildDays_Array[row]
+        print(vaildDays)
         }
     
     
@@ -183,6 +190,36 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     
     @IBAction func save_Button() {
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+
+            guard let user = user else {
+                return
+            }
+            self.userUid  = user.uid
+            
+            self.db.collection("AdultUsers").document(self.userUid).updateData(
+                ["dishes" : [
+                    
+                    "\(self.dishname)":[
+                        "dishname" :"\(self.dishname)", "createdDate":"\(self.createdDate)","vaildDays":"\(self.vaildDays)","position":"\(self.position)","photo":"写真のurl","memoText":"\(self.memoText)"
+                    ]
+                ]
+                ])
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
 
