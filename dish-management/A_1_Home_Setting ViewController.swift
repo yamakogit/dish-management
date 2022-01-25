@@ -23,7 +23,7 @@ class A_1_Home_Setting_ViewController: UIViewController {
     var userUid: String = ""
     var username: String = ""
     var groupID: String = ""
-    
+    var dictionaly: Dictionary<String, String> = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +50,36 @@ class A_1_Home_Setting_ViewController: UIViewController {
             
             print("ここまで①")
             print(self.userUid)
+            
+            
+            let docRef = self.db.collection("AdultUsers").document("\(self.userUid)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let documentdata = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(documentdata)")
+                    dictionaly = Dictionary<String, Any>(documentdata)
+                    self.groupUid = (String(documentdata["groupUid"] ?? ""))
+                    print("groupUid: \(self.groupID)")
+                    
+                    
+                    
+                    
+                    
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+            
+            
+            
+            
+            
             //ここでGroupコレクションを作成
 //            user.uid
+            
+            /*ここから
             self.db.collection("AdultUsers").document(self.userUid).getDocument { (snap, error) in
                 if let error = error {
                     //失敗
@@ -65,7 +93,9 @@ class A_1_Home_Setting_ViewController: UIViewController {
                     print("ここまで④")
                 }
             }
-            
+             //ここまで
+             */
+            /*ここから
             self.db.collection("Group").document(self.groupUid).getDocument { (snap, error) in
                 if let error = error {
                     //失敗
@@ -75,7 +105,11 @@ class A_1_Home_Setting_ViewController: UIViewController {
                 guard let data = snap?.data() else { return }
                     self.groupID = data["groupID"] as! String
                 }
+             
+            
             }
+             */
+        //ここまで
             
             self.username_Label.text = self.username
             self.groupID_Label.text = self.groupID
