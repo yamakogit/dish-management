@@ -31,6 +31,9 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     var dishImg: UIImage = UIImage(named: "Applogo_long")!
     
     var userUid: String = ""
+    var groupUid: String = ""
+    var dishesData_Array: Array<Any> = []
+    
     
     
     let vaildDays_Array = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
@@ -191,21 +194,110 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     @IBAction func save_Button() {
         
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
 
             guard let user = user else {
+                
                 return
             }
-            self.userUid  = user.uid
             
-            self.db.collection("AdultUsers").document(self.userUid).updateData(
-                ["dishes" : [
+            self.userUid = user.uid
+            
+            
+            //Adultusersコレクション内の情報を取得
+            let docRef1 = self.db.collection("AdultUsers").document("\(self.userUid)")
+            
+            docRef1.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let documentdata1 = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data1: \(documentdata1)")
                     
-                    "\(self.dishname)":[
-                        "dishname" :"\(self.dishname)", "createdDate":"\(self.createdDate)","vaildDays":"\(self.vaildDays)","position":"\(self.position)","photo":"写真のurl","memoText":"\(self.memoText)"
-                    ]
-                ]
-                ])
+                   
+                    self.groupUid = document.data()!["groupUid"] as! String
+                    print("groupUid: ",self.groupUid)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
+
+                    docRef2.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let documentdata2 = document.data().map(String.init(describing:)) ?? "nil"
+                            print("Document data2: \(documentdata2)")
+
+
+                            let dictionary: [String: Any] = [
+                                "dishname": self.dishname,
+                                "createddate": self.createdDate,
+                                "vaildDays": self.vaildDays,
+                                "position": self.position,
+                                "photo": "photo's_url",
+                                "memo": self.memoText
+                            ]
+                            
+                            
+                            self.dishesData_Array = document.data()!["dishes"] as? Array<Any> ?? []
+                            
+                            print("dish_Array: \(self.dishesData_Array)")
+                        
+                            self.dishesData_Array.append(dictionary)
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                    
+                    let ref = self.db.collection("Group")
+                            ref.document(self.groupUid).updateData( //ここでgroupのuidをランダム作成
+                                ["dishes" : self.dishesData_Array])
+                    { err in
+                        if let err = err {
+                            //失敗
+
+                        } else {
+                            //成功
+                            print("succeed")
+                        }
+                    }
+                    
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
+                    
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+                
+                
+            
+            }
+            
+            
+            
+            
+            
+        }
+        // Do any addi
+            
+            
+            
+                
+        
+        
+           //  ]) //userのuidをgroupコレクションに保存
+
+                
+                
             
             
             
@@ -221,7 +313,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         
         
         
-    }
+
 
     /*
     // MARK: - Navigation
@@ -233,7 +325,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     }
     */
 
-}
+
 
 
 //IV

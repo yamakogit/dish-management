@@ -19,49 +19,10 @@ class Login_3_ViewController: UIViewController {
     }
     
     let db = Firestore.firestore()
-    var unwrap_title: [String] = []
-//        let storyboard: UIStoryboard = self.storyboard!
-//        let nextview = storyboard.instantiateViewController(withIdentifier: "AdultVC")
-//        let navi = UINavigationController(rootViewController: nextview)
-//        navi.modalTransitionStyle = .coverVertical
-//        present(navi, animated: true, completion: nil)
-//    }
-
-
-//
+//    var unwrap_title: [String] = []
+    
+    
     @IBAction func goInst_Button() {
-//        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AdultVC") as! UITabBarController
-//        navigationController?.pushViewController(nextVC, animated: true)・
-        
-        
-        //ここから
-//        func getMedicinesName() -> [String] {
-//              var medicines = [String]()
-//
-//              db.collection("Group").getDocuments() { (querySnapshot, err) in
-//                  if let err = err {
-//                      print("Error getting documents: \(err)")
-//                  } else {
-//                      for document in querySnapshot!.documents {
-//                         let medicineToBeAdded = document.get("syutoku") as! String
-//                         medicines.append(medicineToBeAdded)
-//                          if self.unwrap_title == medicines {
-//                              print("完了")
-//                              print(self.unwrap_title)
-//                          }
-//                          else {
-//                              print("値が代入されていません")
-//                          }
-//                      }
-//                  }
-//              }
-//              return medicines
-//          }
-        
-        
-//        getMedicinesName()
-        
-        //ここまで
         
         
         performSegue(withIdentifier: "toAdultVC", sender: nil)

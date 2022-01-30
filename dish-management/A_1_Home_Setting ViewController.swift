@@ -10,23 +10,46 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class A_1_Home_Setting_ViewController: UIViewController {
+class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var username_Label: UILabel!
     @IBOutlet var groupID_Label: UILabel!
+    @IBOutlet var groupName_Label: UILabel!
     @IBOutlet var mode_Label: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     let db = Firestore.firestore()
     var groupUid: String = ""
     var userUid: String = ""
     var username: String = ""
     var groupID: String = ""
-    var dictionaly: Dictionary<String, String> = [:]
+    var groupName: String = ""
+    var member: [String] = []
     
-    override func viewDidLoad() {
+    
+    var dictionary: Dictionary<String, String> = [:]
+    
+    override func viewDidLoad(){
+        
+        //AIV
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        view.addSubview(activityIndicatorView)
+        
+    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        <#code#>
+//    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
+        
+        activityIndicatorView.startAnimating()
         
         Auth.auth().addStateDidChangeListener{ (auth, user) in
 
@@ -52,15 +75,51 @@ class A_1_Home_Setting_ViewController: UIViewController {
             print(self.userUid)
             
             
-            let docRef = self.db.collection("AdultUsers").document("\(self.userUid)")
+            //Adultusersコレクション内の情報を取得
+            let docRef1 = self.db.collection("AdultUsers").document("\(self.userUid)")
             
-            docRef.getDocument { (document, error) in
+            docRef1.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let documentdata = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(documentdata)")
-                    dictionaly = Dictionary<String, Any>(documentdata)
-                    self.groupUid = (String(documentdata["groupUid"] ?? ""))
-                    print("groupUid: \(self.groupID)")
+                    let documentdata1 = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data1: \(documentdata1)")
+                    
+                   
+                    self.groupUid = document.data()!["groupUid"] as! String
+                    print("groupUid: ",self.groupUid)
+                    self.username = document.data()!["username"] as! String
+                    print("username: ",self.username)
+                    
+                    
+                    
+                    let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
+                    
+                    docRef2.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let documentdata2 = document.data().map(String.init(describing:)) ?? "nil"
+                            print("Document data2: \(documentdata2)")
+                           
+                            
+                            self.groupID = document.data()!["groupID"] as! String
+                            print("groupID: ",self.groupID)
+                            self.groupName = document.data()!["groupName"] as! String
+                            print("groupName: ",self.groupName)
+                            
+                            
+                            self.member = document.data()!["member"] as! Array
+                            print(self.member)
+                            
+                            self.username_Label.text = self.username
+                            self.groupID_Label.text = self.groupID
+                            self.groupName_Label.text = self.groupName
+                            self.tableView.reloadData()
+                            
+                            self.activityIndicatorView.stopAnimating()  //AIV
+                            self.activityIndicatorView.isHidden = true
+                            
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
                     
                     
                     
@@ -71,53 +130,25 @@ class A_1_Home_Setting_ViewController: UIViewController {
                 }
             }
             
-            
-            
-            
-            
-            
-            //ここでGroupコレクションを作成
-//            user.uid
-            
-            /*ここから
-            self.db.collection("AdultUsers").document(self.userUid).getDocument { (snap, error) in
-                if let error = error {
-                    //失敗
-                    print (error)
-                    print("ここまで②　")
-                } else {
-                    print("ここまで③")
-                guard let data = snap?.data() else { return }
-                    self.groupUid = data["groupUid"] as! String
-                    self.username = data["username"] as! String
-                    print("ここまで④")
-                }
-            }
-             //ここまで
-             */
-            /*ここから
-            self.db.collection("Group").document(self.groupUid).getDocument { (snap, error) in
-                if let error = error {
-                    //失敗
-                    print (error)
-                    
-                } else {
-                guard let data = snap?.data() else { return }
-                    self.groupID = data["groupID"] as! String
-                }
-             
-            
-            }
-             */
-        //ここまで
-            
-            self.username_Label.text = self.username
-            self.groupID_Label.text = self.groupID
-            
-            
         }
         // Do any additional setup after loading the view.
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(member.count)
+        return member.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+        let username = member[indexPath.row] //定数distanceに、ラン保存画面で"distance"に保存した「ランニングの距離」の記録を代入
+        cell.textLabel?.text = "\(username)"  //cellにある「Title」Labelに「ランニングの距離」を表示
+        return cell  //cellの戻り値を設定
+    }
+    
+    
+    
     
     
     @IBAction func changeUsername_Button() {
@@ -157,7 +188,12 @@ class A_1_Home_Setting_ViewController: UIViewController {
             textfield.keyboardType = .default
         })
         self.present(alert, animated: true, completion: nil)
+        
+        tableView.reloadData()
+        
+        
     }
+    
 
     @IBAction func instruction_Button() {
         
