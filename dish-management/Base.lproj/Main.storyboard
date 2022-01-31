@@ -1991,7 +1991,7 @@
                         <outlet property="groupID_Label" destination="nQz-Dg-EI0" id="ROr-Ho-Aud"/>
                         <outlet property="groupName_Label" destination="ZQN-as-Dxn" id="vEz-GD-WcH"/>
                         <outlet property="mode_Label" destination="lla-vz-u5d" id="yDt-8i-0OV"/>
-                        <outlet property="tableView" destination="x3Y-c2-WLx" id="UHz-3T-bms"/>
+                        <outlet property="tableView" destination="x3Y-c2-WLx" id="6JW-rw-C1S"/>
                         <outlet property="username_Label" destination="wRI-Xl-G7K" id="C1Z-4o-oha"/>
                     </connections>
                 </viewController>
@@ -2030,9 +2030,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yd1-yt-Ygz">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemOrangeColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ZHx-XH-LsB" userLabel="Dish_TableView">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="Cell" id="ZHx-XH-LsB" userLabel="Dish_TableView">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZHx-XH-LsB" id="pNf-bK-ZS0">

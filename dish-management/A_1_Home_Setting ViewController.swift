@@ -46,8 +46,9 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
 //    }
     
     
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
+        super.viewWillAppear(animated)
         
         activityIndicatorView.startAnimating()
         
@@ -107,11 +108,12 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                             
                             self.member = document.data()!["member"] as! Array
                             print(self.member)
-                            
+                            print("ロード開始")
+                            self.tableView.reloadData()
+                            print("ロード完了")
                             self.username_Label.text = self.username
                             self.groupID_Label.text = self.groupID
                             self.groupName_Label.text = self.groupName
-                            self.tableView.reloadData()
                             
                             self.activityIndicatorView.stopAnimating()  //AIV
                             self.activityIndicatorView.isHidden = true
@@ -135,6 +137,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("行数を設定")
         print(member.count)
         return member.count
     }
