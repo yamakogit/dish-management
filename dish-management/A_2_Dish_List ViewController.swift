@@ -10,16 +10,12 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
-class A_2_Dish_List_ViewController: UIViewController/*, UITableViewDelegate, UITableViewDataSource*/ {
+class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //エラー
     //Type 'A_2_Dish_List_ViewController' does not conform to protocol 'UITableViewDataSource'
     //下記にあり
     
     @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet var dish_imageView: UIImageView!
-//    @IBOutlet var desh_nameLabel: UILabel!
-//    @IBOutlet var daysLeftLabel: UILabel!
-//    @IBOutlet var createdDateLabel: UILabel!
     
     var userUid: String = ""
     var groupUid: String = ""
@@ -31,11 +27,9 @@ class A_2_Dish_List_ViewController: UIViewController/*, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-/*要復活
         tableView.delegate = self
         tableView.dataSource = self
-        */
-        
+        tableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -89,6 +83,7 @@ class A_2_Dish_List_ViewController: UIViewController/*, UITableViewDelegate, UIT
                             
                             print("dish_Array: \(self.dishesData_Array)")
                             self.dishesDataSecond_Array = self.dishesData_Array as! [[String: Any]]
+                            self.tableView.reloadData()
                     
                         } else {
                             print("Document does not exist")
@@ -112,21 +107,32 @@ class A_2_Dish_List_ViewController: UIViewController/*, UITableViewDelegate, UIT
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!  //定数cellに、ラン保存画面で"Cell"に保存したラン記録を代入
-        let dishname = dishesDataSecond_Array[indexPath.row]["dishname"] as! String  //定数dateに、ラン保存画面で"date"に保存した「ランをした日付」の記録を代入
-        cell.detailTextLabel?.text = "\(dishname) m" //cellにある「detail」Labelにランをした日付を表示
-        let position = dishesDataSecond_Array[indexPath.row]["position"] as! String  //定数distanceに、ラン保存画面で"distance"に保存した「ランニングの距離」の記録を代入
-        cell.textLabel?.text = "\(position) m"  //cellにある「Title」Labelに「ランニングの距離」を表示
+        let cell = tableView.dequeueReusableCell(withIdentifier: "List") as! A_2_Dish_List_TableViewCell_VC
+        let dishname = dishesDataSecond_Array[indexPath.row]["dishname"] as! String
+        cell.dish_nameLabel?.text = "\(dishname)"
+        let position = dishesDataSecond_Array[indexPath.row]["position"] as! String
+        cell.createdDateLabel?.text = "場所: \(position)"
 //        cell.accessoryType = .disclosureIndicator  //cellの横に > が表示されるように設定
         return cell  //cellの戻り値を設定
     }
     
     
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath){
+        
+        let selectedDishesData = dishesDataSecond_Array[indexPath.row]
+        performSegue(withIdentifier: "toDetail", sender: selectedDishesData)
+        
+}
     
     
-    
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetail" {
+            
+            let nextVC = segue.destination as! A_2_Dish_Detail_ViewController
+            nextVC.selectedDishesData = sender as! [String: Any]
+            
+        }
+    }
     
     
     @IBAction func addDishButton() {

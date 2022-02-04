@@ -75,7 +75,8 @@ class Login_1_6_ViewController: UIViewController {
             ref.document(createduid).setData( //ここでgroupのuidをランダム作成
                                                             ["groupID" : "\(self.groupID)", //groupIDを保存
                                                              "groupName" : "\(self.groupname)", //group名を保存
-                                                             "member" : ["\(user.uid)"]]) //userのuidをgroupコレクションに保存
+                                                             "membername" : ["\(self.username)"],
+                                                             "memberemail": ["\(user.email as! String)"]]) //userのuidをgroupコレクションに保存
             
             
             

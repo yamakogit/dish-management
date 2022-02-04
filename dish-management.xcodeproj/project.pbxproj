@@ -12,6 +12,7 @@
 		E136CCEC27523D0B00F45887 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E136CCEB27523D0B00F45887 /* FirebaseFirestore */; };
 		E14C034D2764BB1B00E8BC9F /* Login_1-5 ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C034C2764BB1B00E8BC9F /* Login_1-5 ViewController.swift */; };
 		E14C034F2764BB2B00E8BC9F /* Login_1-6 ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C034E2764BB2B00E8BC9F /* Login_1-6 ViewController.swift */; };
+		E188ACA127A96C4F006EF289 /* A_2_Dish_List TableViewCell VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E188ACA027A96C4F006EF289 /* A_2_Dish_List TableViewCell VC.swift */; };
 		E1B48D3127957E6700EA682A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1B48D3027957E6700EA682A /* GoogleService-Info.plist */; };
 		E1B48D332798DAD100EA682A /* Tabbar ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B48D322798DAD100EA682A /* Tabbar ViewController.swift */; };
 		E1F00FB8272D4F0300F1C3FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F00FB7272D4F0300F1C3FA /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		E14C034C2764BB1B00E8BC9F /* Login_1-5 ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login_1-5 ViewController.swift"; sourceTree = "<group>"; };
 		E14C034E2764BB2B00E8BC9F /* Login_1-6 ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login_1-6 ViewController.swift"; sourceTree = "<group>"; };
+		E188ACA027A96C4F006EF289 /* A_2_Dish_List TableViewCell VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "A_2_Dish_List TableViewCell VC.swift"; sourceTree = "<group>"; };
 		E1B48D3027957E6700EA682A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E1B48D322798DAD100EA682A /* Tabbar ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tabbar ViewController.swift"; sourceTree = "<group>"; };
 		E1F00FB4272D4F0300F1C3FA /* dish-management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dish-management.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				E1FC51132753089200E4C761 /* A_1_Home_Top ViewController.swift */,
 				E1FC5115275308CF00E4C761 /* A_1_Home_Setting ViewController.swift */,
 				E1FC51172753090B00E4C761 /* A_2_Dish_List ViewController.swift */,
+				E188ACA027A96C4F006EF289 /* A_2_Dish_List TableViewCell VC.swift */,
 				E1FC51192753091900E4C761 /* A_2_Dish_Detail ViewController.swift */,
 				E1FC511B2753092900E4C761 /* A_2_Dish_Add ViewController.swift */,
 				E1FC511D2753096C00E4C761 /* A_3_Send_1 ViewController.swift */,
@@ -225,6 +228,7 @@
 				E1FC511A2753091900E4C761 /* A_2_Dish_Detail ViewController.swift in Sources */,
 				E1FC51122753083B00E4C761 /* Login_3 ViewController.swift in Sources */,
 				E14C034D2764BB1B00E8BC9F /* Login_1-5 ViewController.swift in Sources */,
+				E188ACA127A96C4F006EF289 /* A_2_Dish_List TableViewCell VC.swift in Sources */,
 				E1FC51042753078000E4C761 /* Login_0 ViewController.swift in Sources */,
 				E1FC510E2753082200E4C761 /* Login_2-1 ViewController.swift in Sources */,
 				E14C034F2764BB2B00E8BC9F /* Login_1-6 ViewController.swift in Sources */,

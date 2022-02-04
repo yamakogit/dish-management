@@ -16,12 +16,27 @@ class A_2_Dish_Detail_ViewController: UIViewController {
     @IBOutlet var positionLabel: UILabel!
     @IBOutlet var memo_textView: UITextView!
     
+    var selectedDishesData: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let dishname = selectedDishesData["dishname"] as! String
+        let createddate = selectedDishesData["createddate"] as! String
+        let vaildDays = selectedDishesData["vaildDays"] as! String
+        let position = selectedDishesData["position"] as! String
+        let photo = selectedDishesData["photo"] as! String
+        let memo = selectedDishesData["memo"] as! String
+        
+        dish_nameLabel.text = dishname
+        createDateLabel.text = createddate
+        daysLeftLabel.text = vaildDays
+        positionLabel.text = position
+        memo_textView.text = memo
+        
     }
+    
     
     
     @IBAction func edit_Button() {

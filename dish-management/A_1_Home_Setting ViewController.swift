@@ -28,11 +28,15 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     var groupID: String = ""
     var groupName: String = ""
     var member: [String] = []
+    var email: [String] = []
     
     
     var dictionary: Dictionary<String, String> = [:]
     
     override func viewDidLoad(){
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         //AIV
         activityIndicatorView.center = view.center
@@ -106,7 +110,8 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                             print("groupName: ",self.groupName)
                             
                             
-                            self.member = document.data()!["member"] as! Array
+                            self.member = document.data()!["membername"] as! Array
+                            self.email = document.data()!["memberemail"] as! Array
                             print(self.member)
                             print("ロード開始")
                             self.tableView.reloadData()
@@ -145,8 +150,10 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        let username = member[indexPath.row] //定数distanceに、ラン保存画面で"distance"に保存した「ランニングの距離」の記録を代入
-        cell.textLabel?.text = "\(username)"  //cellにある「Title」Labelに「ランニングの距離」を表示
+        let username = member[indexPath.row]
+        let useremail = email[indexPath.row]
+        cell.textLabel?.text = "\(username)"
+        cell.detailTextLabel?.text = "\(useremail)"
         return cell  //cellの戻り値を設定
     }
     
