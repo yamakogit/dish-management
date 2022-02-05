@@ -1086,7 +1086,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dk5-4f-PtP"/>
                     <connections>
-                        <segue destination="zS3-ah-RlN" kind="show" identifier="toAdultVC" id="epc-Aj-Mrc"/>
+                        <segue destination="zS3-ah-RlN" kind="presentation" identifier="toAdultVC" modalPresentationStyle="fullScreen" id="epc-Aj-Mrc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8UD-aK-M5h" sceneMemberID="firstResponder"/>
@@ -1097,6 +1097,7 @@
         <scene sceneID="wRv-nr-jXH">
             <objects>
                 <tabBarController storyboardIdentifier="AdultVC" id="zS3-ah-RlN" userLabel="A_TabBar VC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tyC-Uq-c0M"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q2D-aw-Il2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3852,7 +3853,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kcy-p6-URl"/>
+        <segue reference="ghk-e0-nRl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Applogo_long" width="259" height="194"/>
