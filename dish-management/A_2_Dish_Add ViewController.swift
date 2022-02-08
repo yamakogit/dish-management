@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import firestorage
+import FirebaseStorage
 
 class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextViewDelegate {
 
@@ -23,6 +23,9 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     let createdDate_Formatter = DateFormatter()  //DP
     
     let db = Firestore.firestore()
+    let storage = Storage.storage()
+    
+    var photoNumber = UserDefaults.standard.integer(forKey: "photoNumber")
     
     var dishname: String = ""
     var position: String = ""
@@ -30,6 +33,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     var createdDate: String = ""
     var vaildDays: String = ""
     var dishImg: UIImage = UIImage(named: "Applogo_long")!
+    var dishImgURL: URL?
     
     var userUid: String = ""
     var groupUid: String = ""
@@ -297,7 +301,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         
            //  ]) //userのuidをgroupコレクションに保存
 
-                
+    
                 
             
             
@@ -336,8 +340,59 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         dishImg = info[.originalImage] as! UIImage
         dishImg_imageView.image = dishImg
+        print("ここまで正常")
+        
+        print(photoNumber)
+        photoNumber += 1
+        print("できました ",photoNumber)
+        var photonumberstring: String = "\(photoNumber)"
+        
+        dishImgURL = info[.imageURL] as! URL
+        print(dishImgURL)
+        
+        let reference = storage.reference()
+        let path = "gs://dish-management-new.appspot.com/\(userUid)/dishes/photoImg"
+        let imageRef = reference.child(path)
+        
+        let url = URL(string: "\(dishImgURL)")
+        print(url)
+        if url == nil {
+            print("失敗しました")
+        } else {
+            print("成功しました")
+            
+        let uploadTask = imageRef.putFile(from: url!)
+        
+            var downloadURL: URL?
+            
+            uploadTask.observe(.success) { _ in
+                imageRef.downloadURL { url, error in
+                    if let url = url {
+                        print("ここまできている")
+                        downloadURL = url
+                        print(downloadURL as Any)
+                        UserDefaults.standard.set(self.photoNumber, forKey: "photoNumber")
+                    }
+                }
+            }
+            
+            
+            
+        }
+        
+        
+        
         self.dismiss(animated: true)
+        
+//        extension UIImageView {
+//            func getFileName() -> String? {
+//                return self.image?.accessibilityIdentifier
+//            }
+//        }
+        
     }
+    
+    
     
     //Cancelが押された際
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -346,6 +401,3 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
     }
     
 }
-
-
-

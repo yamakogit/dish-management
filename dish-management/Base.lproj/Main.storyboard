@@ -531,9 +531,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-Fb-wal" userLabel="Detail_Gonext_Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-Fb-wal" userLabel="Detail_Gonext_Button">
                                 <rect key="frame" x="182" y="699" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="43a-U0-fC7"/>
+                                    <constraint firstAttribute="height" constant="50" id="A9t-WB-ISz"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
@@ -548,8 +551,10 @@
                             <constraint firstItem="lj3-tF-9oI" firstAttribute="centerX" secondItem="ky7-kQ-cux" secondAttribute="centerX" id="A4Y-nq-LUF"/>
                             <constraint firstItem="lj3-tF-9oI" firstAttribute="top" secondItem="DH3-98-LOF" secondAttribute="bottom" constant="30" id="Ks9-eW-lrc"/>
                             <constraint firstItem="1AM-Pw-XNR" firstAttribute="height" secondItem="DH3-98-LOF" secondAttribute="height" id="N1b-gV-WCp"/>
+                            <constraint firstItem="ZWg-ao-tg0" firstAttribute="bottom" secondItem="Y8s-Fb-wal" secondAttribute="bottom" constant="113" id="cTv-dP-zZ6"/>
                             <constraint firstItem="P0C-Ic-IDk" firstAttribute="centerX" secondItem="lj3-tF-9oI" secondAttribute="centerX" id="gLT-70-ZuH"/>
                             <constraint firstItem="DH3-98-LOF" firstAttribute="centerX" secondItem="ky7-kQ-cux" secondAttribute="centerX" id="jTA-c9-IF6"/>
+                            <constraint firstItem="Y8s-Fb-wal" firstAttribute="centerX" secondItem="ky7-kQ-cux" secondAttribute="centerX" id="jhS-WJ-fWb"/>
                             <constraint firstItem="DH3-98-LOF" firstAttribute="centerY" secondItem="1AM-Pw-XNR" secondAttribute="centerY" id="khu-Uv-ExE"/>
                             <constraint firstItem="P0C-Ic-IDk" firstAttribute="top" secondItem="lj3-tF-9oI" secondAttribute="top" constant="45" id="ns0-m3-L5u"/>
                             <constraint firstItem="1AM-Pw-XNR" firstAttribute="width" secondItem="DH3-98-LOF" secondAttribute="width" id="u4c-ou-JlQ"/>
@@ -3490,9 +3495,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSG-NB-6an" userLabel="Detail_Gonext_Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSG-NB-6an" userLabel="Detail_Gonext_Button">
                                 <rect key="frame" x="182" y="674" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Jh7-mD-mes"/>
+                                    <constraint firstAttribute="height" constant="50" id="WSc-pO-t9A"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="GoButton"/>
                                 <connections>
@@ -3508,10 +3516,12 @@
                             <constraint firstItem="W1k-Vx-u0I" firstAttribute="centerX" secondItem="V3f-yL-3L0" secondAttribute="centerX" id="CHh-E3-7Fv"/>
                             <constraint firstItem="VEl-y5-R4T" firstAttribute="top" secondItem="lo0-MN-G9J" secondAttribute="top" constant="45" id="GQb-mW-s6Y"/>
                             <constraint firstItem="jce-8g-nF8" firstAttribute="bottom" secondItem="lo0-MN-G9J" secondAttribute="bottom" constant="56" id="H6x-KZ-KC3"/>
+                            <constraint firstItem="MSG-NB-6an" firstAttribute="centerX" secondItem="94G-yz-L99" secondAttribute="centerX" id="XOI-Uz-x6g"/>
                             <constraint firstItem="W1k-Vx-u0I" firstAttribute="width" secondItem="V3f-yL-3L0" secondAttribute="width" id="ZpK-Q9-8VK"/>
                             <constraint firstItem="V3f-yL-3L0" firstAttribute="top" secondItem="jce-8g-nF8" secondAttribute="top" constant="15" id="e88-8b-E59"/>
                             <constraint firstItem="W1k-Vx-u0I" firstAttribute="height" secondItem="V3f-yL-3L0" secondAttribute="height" id="elm-i0-FxO"/>
                             <constraint firstItem="VEl-y5-R4T" firstAttribute="centerX" secondItem="lo0-MN-G9J" secondAttribute="centerX" id="ire-YB-1q6"/>
+                            <constraint firstItem="jce-8g-nF8" firstAttribute="bottom" secondItem="MSG-NB-6an" secondAttribute="bottom" constant="138" id="j6Z-bf-mse"/>
                             <constraint firstItem="lo0-MN-G9J" firstAttribute="centerX" secondItem="94G-yz-L99" secondAttribute="centerX" id="rsE-Ps-Zvs"/>
                             <constraint firstItem="V3f-yL-3L0" firstAttribute="centerY" secondItem="W1k-Vx-u0I" secondAttribute="centerY" id="xcT-JT-9cZ"/>
                         </constraints>
@@ -3853,7 +3863,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ghk-e0-nRl"/>
+        <segue reference="kcy-p6-URl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Applogo_long" width="259" height="194"/>
