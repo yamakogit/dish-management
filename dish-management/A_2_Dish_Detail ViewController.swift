@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class A_2_Dish_Detail_ViewController: UIViewController {
 
@@ -17,6 +18,7 @@ class A_2_Dish_Detail_ViewController: UIViewController {
     @IBOutlet var memo_textView: UITextView!
     
     var selectedDishesData: [String: Any] = [:]
+    let storage = Storage.storage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +28,18 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         let createddate = selectedDishesData["createddate"] as! String
         let vaildDays = selectedDishesData["vaildDays"] as! String
         let position = selectedDishesData["position"] as! String
-        let photo = selectedDishesData["photo"] as! String
         let memo = selectedDishesData["memo"] as! String
+        
+        let photourl = selectedDishesData["photo"] as! String
+        
+        let imageUrl:URL = URL(string:photourl)!
+                // URL型からData型に変換
+                let imageData:Data = try! Data(contentsOf: imageUrl)
+        
+                // 画像をセットする
+                dishImg_imageView.image = UIImage(data: imageData)!
+        
+        
         
         dish_nameLabel.text = dishname
         createDateLabel.text = createddate

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //エラー
@@ -22,6 +23,8 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     var dishesDataSecond_Array: [[String: Any]] = []
     var dishesData_Array: Array<Any> = []
     
+    
+    let storage = Storage.storage()
     let db = Firestore.firestore()
     
     
@@ -112,6 +115,21 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         cell.dish_nameLabel?.text = "\(dishname)"
         let position = dishesDataSecond_Array[indexPath.row]["position"] as! String
         cell.createdDateLabel?.text = "場所: \(position)"
+        let vaildDays = dishesDataSecond_Array[indexPath.row]["vaildDays"] as! String
+        cell.daysLeftLabel?.text = "あと\(vaildDays)日"
+        
+        let photourl = dishesDataSecond_Array[indexPath.row]["photo"] as! String
+        
+        let imageUrl:URL = URL(string:photourl)!
+                // URL型からData型に変換
+                let imageData:Data = try! Data(contentsOf: imageUrl)
+        
+                // 画像をセットする
+                cell.dish_imageView.image = UIImage(data: imageData)!
+        
+        
+        
+        
 //        cell.accessoryType = .disclosureIndicator  //cellの横に > が表示されるように設定
         return cell  //cellの戻り値を設定
     }

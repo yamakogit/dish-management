@@ -7,12 +7,18 @@
 
 import UIKit
 import Firebase //FB
+import FirebaseFirestore
+import FirebaseAuth
 
 class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var groupID_TF: UITextField!
     
+    
     var groupID :String = ""
+    let db = Firestore.firestore()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,14 +72,38 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func gonext() {
         
+        print("押された")
+        
         
         if groupID == "" {
             alert(title: "グループIDが\n正しく入力されていません", message: "グループIDを\nもう一度入れ直してください。")
             print("error: group ID not found")
             
         }  else {
-            
+            print("ここまできた")
         
+            db.collection("Group").whereField("GroupID", isEqualTo: groupID).getDocuments() {(QuerySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in QuerySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        let data = document.data()
+                        let value = data["GroupID"]
+                        let documentUID = document.documentID
+                        print("これがデータ:\(data)")
+                        print("groupIDの値:\(value)")
+                        print("documentのUID:\(documentUID)")
+                    }
+                }
+                
+            }
+            
+            
+            
+            
+            
         
             //MARK: ★navigation遷移
             //        self.performSegue(withIdentifier: "ここにidentifier書く", sender: nil)

@@ -39,6 +39,9 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     var groupUid: String = ""
     var dishesData_Array: Array<Any> = []
     
+    var downloadURL: String?
+    var url2: String?
+    
     
     
     let vaildDays_Array = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
@@ -93,6 +96,19 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         memo_textView.delegate = self
         
         // Do any additional setup after loading the view.
+        
+        
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
+
+            guard let user = user else {
+                
+                return
+            }
+            
+            self.userUid = user.uid
+        
+        }
+        
     }
     
     
@@ -242,7 +258,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                                 "createddate": self.createdDate,
                                 "vaildDays": self.vaildDays,
                                 "position": self.position,
-                                "photo": "photo's_url",
+                                "photo": self.downloadURL,
                                 "memo": self.memoText
                             ]
                             
@@ -347,14 +363,16 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         print("できました ",photoNumber)
         var photonumberstring: String = "\(photoNumber)"
         
-        dishImgURL = info[.imageURL] as! URL
-        print(dishImgURL)
+        
         
         let reference = storage.reference()
-        let path = "gs://dish-management-new.appspot.com/\(userUid)/dishes/photoImg"
+        let path = "gs://dish-management-new.appspot.com/user/\(userUid)/dishes/photo\(photonumberstring)"
+        
+        self.url2 = path
+        
         let imageRef = reference.child(path)
         
-        let url = URL(string: "\(dishImgURL)")
+        let url = URL(string: "\(info[.imageURL] as! URL)")
         print(url)
         if url == nil {
             print("失敗しました")
@@ -363,14 +381,17 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
             
         let uploadTask = imageRef.putFile(from: url!)
         
-            var downloadURL: URL?
+            
             
             uploadTask.observe(.success) { _ in
                 imageRef.downloadURL { url, error in
                     if let url = url {
                         print("ここまできている")
-                        downloadURL = url
-                        print(downloadURL as Any)
+                        
+                        let downloadUrlURL = url
+                        self.downloadURL = downloadUrlURL.absoluteString
+                        
+                        print(self.downloadURL as Any)
                         UserDefaults.standard.set(self.photoNumber, forKey: "photoNumber")
                     }
                 }
