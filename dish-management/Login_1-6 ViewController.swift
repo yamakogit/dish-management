@@ -72,6 +72,7 @@ class Login_1_6_ViewController: UIViewController {
             
             let createduid = self.db.collection("Group").document().documentID
             print("createduid: \(createduid)")
+            
             ref.document(createduid).setData( //ここでgroupのuidをランダム作成
                                                             ["groupID" : "\(self.groupID)", //groupIDを保存
                                                              "groupName" : "\(self.groupname)", //group名を保存

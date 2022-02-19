@@ -17,7 +17,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
     var groupID :String = ""
     let db = Firestore.firestore()
-    
+    var groupUid :String = ""
     
 
     override func viewDidLoad() {
@@ -82,7 +82,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
         }  else {
             print("ここまできた")
         
-            db.collection("Group").whereField("GroupID", isEqualTo: groupID).getDocuments() {(QuerySnapshot, err) in
+            db.collection("Group").whereField("groupID", isEqualTo: groupID).getDocuments() {(QuerySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -90,11 +90,19 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
                         print("\(document.documentID) => \(document.data())")
                         
                         let data = document.data()
-                        let value = data["GroupID"]
-                        let documentUID = document.documentID
+                        let groupID = data["groupID"]
+                        let groupName = data["groupName"]
+                        
+                        self.groupUid = document.documentID
                         print("これがデータ:\(data)")
-                        print("groupIDの値:\(value)")
-                        print("documentのUID:\(documentUID)")
+                        print("groupID: \(groupID)")
+                        print("groupName: \(groupName)")
+                        print("groupUid: \(self.groupUid)")
+                        
+                        UserDefaults.standard.set(groupName, forKey: "groupName1")
+                        UserDefaults.standard.set(self.groupUid, forKey: "groupUid1")
+                        self.performSegue(withIdentifier: "go-L-1-4", sender: nil)
+                        
                     }
                 }
                 

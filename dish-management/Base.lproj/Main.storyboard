@@ -705,7 +705,7 @@
                     <navigationItem key="navigationItem" id="2SI-Wb-wqw"/>
                     <connections>
                         <outlet property="name_Label" destination="qWR-8c-mVh" id="MNY-HA-Xqs"/>
-                        <segue destination="xMC-JE-D9d" kind="show" id="ghk-e0-nRl"/>
+                        <segue destination="xMC-JE-D9d" kind="show" identifier="go-L-3-2" id="ghk-e0-nRl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q4-I9-Lrr" sceneMemberID="firstResponder"/>
@@ -3863,7 +3863,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kcy-p6-URl"/>
+        <segue reference="ghk-e0-nRl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Applogo_long" width="259" height="194"/>
