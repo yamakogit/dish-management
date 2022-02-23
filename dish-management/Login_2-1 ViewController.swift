@@ -38,6 +38,7 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
         mail_TF.addTarget(self, action: #selector(Login_2_1_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -96,17 +97,22 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
                 
                 guard let strongSelf = self else { return }
                 
-                
-            print("succeed: login")
-                //MARK: ★?,!不要？
-                self?.activityIndicatorView.stopAnimating()  //AIV
-                self?.activityIndicatorView.isHidden = true
-                
-
-                
-                //MARK: ★navigation遷移
-                self?.performSegue(withIdentifier: "go-L-2-2", sender: nil)
-                
+                if let user = authResult?.user {
+                //成功
+                    print("succeed: login")
+                        //MARK: ★?,!不要？
+                        self?.activityIndicatorView.stopAnimating()  //AIV
+                        
+                        //MARK: ★navigation遷移
+                        self?.performSegue(withIdentifier: "go-L-2-2", sender: nil)
+                    
+                } else {
+                    self?.activityIndicatorView.stopAnimating()  //AIV
+                //失敗
+                self?.alert(title: "エラー", message: "ログインに失敗しました。\n正しい情報を入力してください。")
+                print("error: password not found")
+           
+                }
             }
         }
         

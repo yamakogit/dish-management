@@ -139,6 +139,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="サインイン">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="signin" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXq-1W-1tU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -168,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="269"/>
+            <point key="canvasLocation" x="-204.34782608695653" y="268.52678571428572"/>
         </scene>
         <!--Login_1-1 VC-->
         <scene sceneID="6at-Np-fVm">
@@ -963,7 +966,7 @@
                     <navigationItem key="navigationItem" id="zss-uN-RzB"/>
                     <connections>
                         <outlet property="name_Label" destination="PZ0-DC-geG" id="ijl-S1-sUf"/>
-                        <segue destination="xMC-JE-D9d" kind="show" id="8j5-sj-PKY"/>
+                        <segue destination="xMC-JE-D9d" kind="show" identifier="go-L-3-3" id="8j5-sj-PKY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3G-zY-Y1Z" sceneMemberID="firstResponder"/>
@@ -1518,11 +1521,11 @@
             <objects>
                 <viewController id="704-qR-kDC" userLabel="A_1_Home_Setting VC" customClass="A_1_Home_Setting_ViewController" customModule="dish_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hJF-S1-9rA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1014"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydU-v4-sZH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1014"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="960"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHV-JS-vri">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1014"/>
@@ -1534,7 +1537,11 @@
                                                 </constraints>
                                                 <items>
                                                     <navigationItem title="設定" id="oBy-WI-zCg">
-                                                        <barButtonItem key="rightBarButtonItem" title="閉じる" id="Tau-Le-p7M"/>
+                                                        <barButtonItem key="rightBarButtonItem" title="閉じる" id="Tau-Le-p7M">
+                                                            <connections>
+                                                                <action selector="close_Button" destination="704-qR-kDC" id="hEI-6U-hZO"/>
+                                                            </connections>
+                                                        </barButtonItem>
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
@@ -1992,7 +1999,7 @@
                             <constraint firstItem="ydU-v4-sZH" firstAttribute="top" secondItem="hJF-S1-9rA" secondAttribute="top" id="hGV-fM-aEM"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="1068"/>
+                    <size key="freeformSize" width="414" height="1014"/>
                     <connections>
                         <outlet property="groupID_Label" destination="nQz-Dg-EI0" id="ROr-Ho-Aud"/>
                         <outlet property="groupName_Label" destination="ZQN-as-Dxn" id="vEz-GD-WcH"/>
@@ -3863,7 +3870,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ghk-e0-nRl"/>
+        <segue reference="8j5-sj-PKY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Applogo_long" width="259" height="194"/>

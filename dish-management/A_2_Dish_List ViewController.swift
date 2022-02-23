@@ -18,10 +18,13 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
+    
     var userUid: String = ""
     var groupUid: String = ""
     var dishesDataSecond_Array: [[String: Any]] = []
     var dishesData_Array: Array<Any> = []
+    
     
     
     let storage = Storage.storage()
@@ -29,10 +32,20 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
+        
+        //AIV
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
+        view.addSubview(activityIndicatorView)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -45,6 +58,9 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
 
     override func viewWillAppear(_ animated: Bool) {
+        
+        activityIndicatorView.startAnimating()  //AIV
+        
         Auth.auth().addStateDidChangeListener{ (auth, user) in
 
             guard let user = user else {
@@ -53,6 +69,8 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             self.userUid = user.uid
+            
+            
             
             
             //Adultusersコレクション内の情報を取得
@@ -70,10 +88,6 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
                     
                     
                     
-                    
-                    
-                    
-                    
                     let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
 
                     docRef2.getDocument { (document, error) in
@@ -87,6 +101,8 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
                             print("dish_Array: \(self.dishesData_Array)")
                             self.dishesDataSecond_Array = self.dishesData_Array as! [[String: Any]]
                             self.tableView.reloadData()
+                            
+                            self.activityIndicatorView.stopAnimating()  //AIV
                     
                         } else {
                             print("Document does not exist")
@@ -98,9 +114,8 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
                     }
                 }
                 
-                
-            
             }
+        
     }
     
     
@@ -137,7 +152,12 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath){
         
+        self.activityIndicatorView.startAnimating()  //AIV
+        
         let selectedDishesData = dishesDataSecond_Array[indexPath.row]
+        
+        self.activityIndicatorView.stopAnimating()  //AIV
+        
         performSegue(withIdentifier: "toDetail", sender: selectedDishesData)
         
 }

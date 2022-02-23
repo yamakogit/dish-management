@@ -55,6 +55,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
         
@@ -182,6 +183,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     
     @IBAction func addPhoto_Button_Tapped() {
+
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             
         let picker = UIImagePickerController()  //IV
@@ -215,6 +217,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     @IBAction func save_Button() {
         
+        activityIndicatorView.startAnimating()
         
         Auth.auth().addStateDidChangeListener{ (auth, user) in
 
@@ -237,9 +240,6 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                    
                     self.groupUid = document.data()!["groupUid"] as! String
                     print("groupUid: ",self.groupUid)
-                    
-                    
-                    
                     
                     
                     
@@ -273,12 +273,11 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                             
                             
                             
-                            
-                            
-                    
                     let ref = self.db.collection("Group")
-                            ref.document(self.groupUid).updateData( //ここでgroupのuidをランダム作成
+                    
+                            ref.document(self.groupUid).updateData(
                                 ["dishes" : self.dishesData_Array])
+                            
                     { err in
                         if let err = err {
                             //失敗
@@ -286,6 +285,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                         } else {
                             //成功
                             print("succeed")
+                            self.activityIndicatorView.stopAnimating()
                         }
                     }
                     
@@ -354,6 +354,9 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
     
     //写真を選んだ後に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        activityIndicatorView.startAnimating()  //AIV
+        
         dishImg = info[.originalImage] as! UIImage
         dishImg_imageView.image = dishImg
         print("ここまで正常")
@@ -402,7 +405,7 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         }
         
         
-        
+        activityIndicatorView.stopAnimating()  //AIV
         self.dismiss(animated: true)
         
 //        extension UIImageView {

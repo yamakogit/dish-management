@@ -19,11 +19,20 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     let db = Firestore.firestore()
     var groupUid :String = ""
     
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.hidesBackButton = true
+        
+        //AIV
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        view.addSubview(activityIndicatorView)
         
         //TF
         groupID_TF.delegate = self
@@ -72,6 +81,11 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func gonext() {
         
+        
+        
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()  //AIV
+        
         print("押された")
         
         
@@ -90,17 +104,25 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
                         print("\(document.documentID) => \(document.data())")
                         
                         let data = document.data()
-                        let groupID = data["groupID"]
-                        let groupName = data["groupName"]
+                        let groupID = data["groupID"] as! String
+                        let groupName = data["groupName"]  as! String
                         
                         self.groupUid = document.documentID
+                        
+                        UserDefaults.standard.set(groupName, forKey: "groupName1")
+                        UserDefaults.standard.set(self.groupUid, forKey: "groupUid1")
+                        
+                        
                         print("これがデータ:\(data)")
                         print("groupID: \(groupID)")
                         print("groupName: \(groupName)")
                         print("groupUid: \(self.groupUid)")
                         
-                        UserDefaults.standard.set(groupName, forKey: "groupName1")
-                        UserDefaults.standard.set(self.groupUid, forKey: "groupUid1")
+                        
+                        self.activityIndicatorView.stopAnimating()  //AIV
+                        self.activityIndicatorView.isHidden = true
+                        
+                        
                         self.performSegue(withIdentifier: "go-L-1-4", sender: nil)
                         
                     }

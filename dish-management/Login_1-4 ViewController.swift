@@ -28,10 +28,13 @@ class Login_1_4_ViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
         
-        self.groupName = UserDefaults.standard.string(forKey: "groupname1") ?? "デフォルト値"
+        self.groupName = UserDefaults.standard.string(forKey: "groupName1") ?? "デフォルト値"
         
         self.groupUid = UserDefaults.standard.string(forKey: "groupUid1") ?? "デフォルト値"
         self.username = UserDefaults.standard.string(forKey: "username") ?? "デフォルト値"
+        
+        
+        
         
         name_Label.text = groupName
         
@@ -39,13 +42,13 @@ class Login_1_4_ViewController: UIViewController {
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
     }
     
     @IBAction func gonext() {
         
-        activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()  //AIV
         
         Auth.auth().addStateDidChangeListener{ (auth, user) in
@@ -54,6 +57,9 @@ class Login_1_4_ViewController: UIViewController {
                 
                 return
             }
+            
+            print("ここ！！！！")
+            print(user.uid)
             
             self.userUid = user.uid
             self.useremail = user.email!
@@ -76,7 +82,8 @@ class Login_1_4_ViewController: UIViewController {
                             print("membername_Array: \(membernameArray)")
                         
                             memberemailArray.append(self.useremail)
-                    
+                            membernameArray.append(self.username)
+                            
                     let ref = self.db.collection("Group")
                             ref.document(self.groupUid).updateData( //ここでgroupのuidをランダム作成
                                 ["memberemail" : memberemailArray,
@@ -91,22 +98,28 @@ class Login_1_4_ViewController: UIViewController {
                             //成功
                             print("succeed")
                             
-                            let ref3 = self.db.collection("Group")
-                            ref3.document(self.userUid).updateData( //ここでgroupのuidをランダム作成
+                            //ここから
+                            let ref3 = self.db.collection("AdultUsers")
+                            ref3.document(self.userUid).setData( //ここでgroupのuidをランダム作成
                                         ["groupUid" : self.groupUid,
                                          "username" : self.username])
+                            
+                            
                             { err in
                                 if let err = err {
                                     //失敗
+                                    print("失敗")
+                                    
 
                                 } else {
+                                    
                                     //成功
-                                    print("succeed")
+                                    print("succeed22")
                                     self.activityIndicatorView.stopAnimating()  //AIV
-                                    self.activityIndicatorView.isHidden = true
                                     self.performSegue(withIdentifier: "go-L-3-2", sender: nil)
                                 }
                             }
+                            //ここから
                             
                         }
                     }

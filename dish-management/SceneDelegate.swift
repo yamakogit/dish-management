@@ -13,45 +13,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    var authListener: Any!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
         
-//        let window = UIWindow(windowScene: scene as! UIWindowScene)
-//        self.window = window
-//        window.makeKeyAndVisible()
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//        Auth.auth().addStateDidChangeListener{ (auth, user) in
-//
-//            guard let user = user else {
-//                return
-//            }
-//            if user.uid != "" {
-//                let vc = storyboard.instantiateViewController(identifier:"DefaultVC")
-//                window.rootViewController = vc
-//            } else {
-//                let vc = storyboard.instantiateViewController(identifier:"AdultVC")
-//                window.rootViewController = vc
-//            }
-//
-//        }
-        
-        
-        
-        
-//            let vc = storyboard.instantiateViewController(identifier:"ChildVC")
-//            window.rootViewController = vc
-        
-            
-        
-        
+        autoLogin()
         
     }
-
+    
+    
+    //ここから
+    
+    func autoLogin() {
+        authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+            //その後呼ばれないようにデタッチする
+            Auth.auth().removeStateDidChangeListener(self.authListener! as! NSObjectProtocol)
+            if user != nil {
+                DispatchQueue.main.async {
+                    print("loginされています")
+                    //ログインされているのでメインのViewへ
+                    self.gotoApp()
+                    
+                }
+            } else {
+                print("loginされていません")
+                //認証されていなければ初期画面表示
+                guard let _ = (self.scene as? UIWindowScene) else { return }
+            }
+        })
+    }
+     
+    
+    
+    func gotoApp() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AdultVC") as! UITabBarController
+            window?.rootViewController = vc
+    }
+    
+    //ここまで
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -82,4 +85,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

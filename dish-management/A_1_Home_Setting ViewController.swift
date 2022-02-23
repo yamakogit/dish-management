@@ -42,6 +42,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
     }
@@ -54,7 +55,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        activityIndicatorView.startAnimating()
+        activityIndicatorView.startAnimating()  //AIV
         
         Auth.auth().addStateDidChangeListener{ (auth, user) in
 
@@ -121,7 +122,6 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                             self.groupName_Label.text = self.groupName
                             
                             self.activityIndicatorView.stopAnimating()  //AIV
-                            self.activityIndicatorView.isHidden = true
                             
                         } else {
                             print("Document does not exist")
@@ -159,6 +159,16 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     
     
     
+    //Alert
+    var alertController: UIAlertController!
+    
+    //Alert
+    func alert(title:String, message:String) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true)
+    }
+    
     
     
     @IBAction func changeUsername_Button() {
@@ -174,7 +184,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
             
             let ref1 = self.db.collection("AdultUsers")
             
-            ref1.document(userUid).setData([ //上で作成したgroupのuidをuserのuidに保存
+            ref1.document(userUid).updateData([ //上で作成したgroupのuidをuserのuidに保存
                 "username" : "\(self.username)"
                 
             ])
@@ -184,6 +194,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                     //失敗
 
                 } else {
+                    //成功
                 }
             }
         })
@@ -210,7 +221,48 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func logout_Button() {
+        let firebaseAuth = Auth.auth()
+       do {
+         try firebaseAuth.signOut()
+//           alert(title: "ログアウト", message: "ログアウト処理が完了しました。\nトップページへ戻ります。")
+           print("ログアウト完了")
+           
+           
+           
+               let alert: UIAlertController = UIAlertController(title: "ログアウト完了",message: "ログアウト処理が完了しました。\nトップページへ戻ります。", preferredStyle: UIAlertController.Style.alert)
+               let confilmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                   (action: UIAlertAction!) -> Void in
+                   
+                   
+                   guard let window = UIApplication.shared.keyWindow else { return }
+                   let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                   if window.rootViewController?.presentedViewController != nil {
+                       // モーダルを開いていたら閉じてから差し替え
+                       window.rootViewController?.dismiss(animated: true) {
+                           window.rootViewController = storyboard.instantiateInitialViewController()
+                       }
+                   } else {
+                       // モーダルを開いていなければそのまま差し替え
+                       window.rootViewController = storyboard.instantiateInitialViewController()
+                   }
+                   
+                   
+               })
+               
+               alert.addAction(confilmAction)
+               
+               //alertを表示
+               present(alert, animated: true, completion: nil)
+           
+           
+       } catch let signOutError as NSError {
+         print("Error signing out: %@", signOutError)
+           alert(title: "エラー", message: "ログアウトに失敗しました")
+       }
+    }
     
+    @IBAction func close_Button() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

@@ -17,12 +17,26 @@ class A_2_Dish_Detail_ViewController: UIViewController {
     @IBOutlet var positionLabel: UILabel!
     @IBOutlet var memo_textView: UITextView!
     
+    
+    var activityIndicatorView = UIActivityIndicatorView()  //AIV
+    
+    
     var selectedDishesData: [String: Any] = [:]
     let storage = Storage.storage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //AIV
+        activityIndicatorView.center = view.center
+        activityIndicatorView.style = .whiteLarge
+        activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
+        view.addSubview(activityIndicatorView)
 
+        
+        activityIndicatorView.startAnimating()  //AIV
+        
         // Do any additional setup after loading the view.
         let dishname = selectedDishesData["dishname"] as! String
         let createddate = selectedDishesData["createddate"] as! String
@@ -46,6 +60,8 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         daysLeftLabel.text = vaildDays
         positionLabel.text = position
         memo_textView.text = memo
+        
+        activityIndicatorView.stopAnimating()  //AIV
         
     }
     

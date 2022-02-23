@@ -44,6 +44,7 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
+        activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
         mail_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -114,12 +115,11 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
             
             Auth.auth().createUser (withEmail: emailadress, password: pass) {
                 authResult, error in
-            print("succeed: login")
+            print("succeed: signup_createUser")
                 
-                self.activityIndicatorView.stopAnimating()  //AIV
-                self.activityIndicatorView.isHidden = true
                 
                 UserDefaults.standard.set(self.username, forKey: "username")
+                self.activityIndicatorView.stopAnimating()  //AIV
                 
                 //MARK: ★navigation遷移
                 self.performSegue(withIdentifier: "go-L-1-1", sender: nil)
@@ -129,6 +129,15 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    
+    @IBAction func signin() {
+        self.performSegue(withIdentifier: "go-L-2-1", sender: nil)
+    }
+    
+    @IBAction func unwindSegue(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        
+    }
     
 
     /*

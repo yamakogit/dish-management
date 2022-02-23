@@ -31,9 +31,10 @@ class Login_1_6_ViewController: UIViewController {
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
-        view.addSubview(activityIndicatorView)
+        activityIndicatorView.hidesWhenStopped = true
+        view.addSubview(activityIndicatorView)  //AIV
         
-        activityIndicatorView.isHidden = false
+        
         activityIndicatorView.startAnimating()  //AIV
         
         
@@ -97,12 +98,12 @@ class Login_1_6_ViewController: UIViewController {
                     //成功
                     print("succeed")
                     self.checkNumber = 1
+                    self.activityIndicatorView.stopAnimating()  //AIV
                 }
             }
         }
         
-        activityIndicatorView.stopAnimating()  //AIV
-        activityIndicatorView.isHidden = true
+        
         
     }
     
