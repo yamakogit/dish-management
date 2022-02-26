@@ -91,7 +91,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
         
         if groupID == "" {
             alert(title: "グループIDが\n正しく入力されていません", message: "グループIDを\nもう一度入れ直してください。")
-            print("error: group ID not found")
+            print("error: groupID is none")
             
         }  else {
             print("ここまできた")
@@ -99,6 +99,11 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
             db.collection("Group").whereField("groupID", isEqualTo: groupID).getDocuments() {(QuerySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
+                    print("error: group ID not found")
+                    
+                    self.activityIndicatorView.stopAnimating()  //AIV
+                    self.activityIndicatorView.isHidden = true
+                    self.alert(title: "エラー", message: "グルーピが見つかりません。\nもう一度、groupIDを\n正しく入力してください。")
                 } else {
                     for document in QuerySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
@@ -121,7 +126,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
                         
                         self.activityIndicatorView.stopAnimating()  //AIV
                         self.activityIndicatorView.isHidden = true
-                        
+                        print("succeed: Enter group")
                         
                         self.performSegue(withIdentifier: "go-L-1-4", sender: nil)
                         

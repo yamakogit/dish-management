@@ -224,9 +224,8 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
         let firebaseAuth = Auth.auth()
        do {
          try firebaseAuth.signOut()
-//           alert(title: "ログアウト", message: "ログアウト処理が完了しました。\nトップページへ戻ります。")
-           print("ログアウト完了")
            
+           print("ログアウト完了")
            
            
                let alert: UIAlertController = UIAlertController(title: "ログアウト完了",message: "ログアウト処理が完了しました。\nトップページへ戻ります。", preferredStyle: UIAlertController.Style.alert)

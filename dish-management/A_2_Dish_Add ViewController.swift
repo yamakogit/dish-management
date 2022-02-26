@@ -19,6 +19,8 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     @IBOutlet var dishImg_imageView: UIImageView!
     @IBOutlet var memo_textView: UITextView!
     
+    @IBOutlet var createdDate_imageView: UIImageView!
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     let createdDate_Formatter = DateFormatter()  //DP
     
@@ -32,7 +34,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     var memoText: String = ""
     var createdDate: String = ""
     var vaildDays: String = ""
-    var dishImg: UIImage = UIImage(named: "Applogo_long")!
+    var dishImg: UIImage?
     var dishImgURL: URL?
     
     var userUid: String = ""
@@ -46,9 +48,10 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     let vaildDays_Array = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
         //AIV
@@ -73,8 +76,8 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
      
         
         //DP
-        createdDate_DatePicker.minimumDate = NSDate() as Date
-        
+        createdDate_DatePicker.maximumDate = NSDate() as Date
+        createdDate_DatePicker.center = createdDate_imageView.center
         
         
         //PV
@@ -147,13 +150,13 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     //DP
     @IBAction func createdDate_DP_Tapped() {
-        createdDate_DatePicker.datePickerMode = UIDatePicker.Mode.dateAndTime
+        createdDate_DatePicker.datePickerMode = UIDatePicker.Mode.date
         createdDate_DatePicker.timeZone = NSTimeZone.local
         createdDate_DatePicker.locale = Locale.current
         createdDate_DatePicker.endEditing(true)
-        createdDate_Formatter.dateFormat = "MM/dd HH:mm"
+        createdDate_Formatter.dateFormat = "yyyy/MM/dd"
         createdDate = createdDate_Formatter.string(from: createdDate_DatePicker.date)
-        print("開始時刻: \(createdDate)")
+        print("日時設定: \(createdDate)")
     }
     
     
@@ -185,10 +188,11 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     @IBAction func addPhoto_Button_Tapped() {
 
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            
+            activityIndicatorView.startAnimating()
         let picker = UIImagePickerController()  //IV
             picker.sourceType = .photoLibrary
             picker.delegate = self
+            activityIndicatorView.stopAnimating()
             present(picker, animated: true)
             
         }
@@ -216,6 +220,20 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     
     @IBAction func save_Button() {
+        
+        if dishname == "" {
+            alert(title: "惣菜名が\n正しく入力されていません", message: "惣菜名を\nもう一度入れ直してください。")
+        } else if position == "" {
+            alert(title: "場所が\n正しく入力されていません", message: "場所をもう一度\n入れ直してください。")
+        } else if memoText == "" {
+            alert(title: "メモが\n正しく入力されていません", message: "メモをもう一度\n入れ直してください。")
+        } else if createdDate == "" {
+            alert(title: "作成日時が\n正しく選択されていません", message: "作成日時を\nもう一度選択し直してください。")
+        } else if vaildDays == "" {
+            alert(title: "有効日数が\n正しく選択されていません", message: "作成日時を\nもう一度選択し直してください。")
+        } else if downloadURL == "" {
+            alert(title: "写真が\n正しく選択されていません", message: "写真を\nもう一度選択し直してください。")
+        } else {
         
         activityIndicatorView.startAnimating()
         
@@ -286,6 +304,8 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                             //成功
                             print("succeed")
                             self.activityIndicatorView.stopAnimating()
+                            
+                            self.alert(title: "保存しました", message: "新たな惣菜を\n保存しました。")
                         }
                     }
                     
@@ -321,7 +341,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                 
             
             
-            
+    }
         }
         
         

@@ -16,6 +16,9 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var mail_TF :UITextField!
     @IBOutlet var user_TF :UITextField!
     @IBOutlet var pass_TF :UITextField!
+    @IBOutlet weak var mail_TF_Const: NSLayoutConstraint!  //key
+    @IBOutlet weak var user_TF_Const: NSLayoutConstraint!  //key
+    @IBOutlet weak var pass_TF_Const: NSLayoutConstraint!  //key
     
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
@@ -51,8 +54,27 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         user_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pass_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillShow),
+                                                   name: UIResponder.keyboardWillShowNotification,
+                                                   object: nil)
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillHide),
+                                                   name: UIResponder.keyboardWillHideNotification,
+                                                   object: nil)
+        
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.configureObserver()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //self.removeObserver()
     }
     
     
@@ -78,9 +100,75 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /*
+    //ここから: キーボードずらす
+    // Notificationを設定
+        @objc func configureObserver() {
+
+            let notification = NotificationCenter.default
+            notification.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
+            notification.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
+        }
+
+        // Notificationを削除
+        func removeObserver() {
+
+            let notification = NotificationCenter.default
+            notification.removeObserver(self)
+        }
+
+        // キーボードが現れた時に、画面全体をずらす。
+        func keyboardWillShow(notification: Notification?) {
+
+            let rect = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+            let duration: TimeInterval? = notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
+            UIView.animate(withDuration: duration!, animations: { () in
+                let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
+                self.view.transform = transform
+
+            })
+        }
+
+        // キーボードが消えたときに、画面を戻す
+        func keyboardWillHide(notification: Notification?) {
+
+            let duration: TimeInterval? = notification?.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? Double
+            UIView.animate(withDuration: duration!, animations: { () in
+
+                self.view.transform = CGAffineTransform.identity
+            })
+        }
+    //ここまで: キーボードずらす
+    */
     
     
+    //key
+    @objc private func keyboardWillShow(_ notification: Notification) {
+
+        guard let keyboardHeight = notification.keyboardHeight,
+              let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            // アニメーションさせたい実装を行う
+            self.pass_TF_Const.constant = keyboardHeight
+        }
+    }
     
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            self.pass_TF_Const.constant = 205
+        }
+    }
     
     
     
@@ -135,9 +223,6 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "go-L-2-1", sender: nil)
     }
     
-    @IBAction func unwindSegue(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
-        
-    }
     
 
     /*
@@ -150,4 +235,22 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     }
     */
 
+}
+
+extension Notification {
+
+    // キーボードの高さ
+    var keyboardHeight: CGFloat? {
+        return (self.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+    }
+
+    // キーボードのアニメーション時間
+    var keybaordAnimationDuration: TimeInterval? {
+        return self.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+    }
+
+    // キーボードのアニメーション曲線
+    var keyboardAnimationCurve: UInt? {
+        return self.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+    }
 }
