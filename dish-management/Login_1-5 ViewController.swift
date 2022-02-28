@@ -12,7 +12,9 @@ import FirebaseFirestore
 
 class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
 
+    
     @IBOutlet weak var groupName_TF: UITextField!
+    @IBOutlet weak var groupName_TF_Const: NSLayoutConstraint!  //key
     
     var groupName : String = ""
     let db = Firestore.firestore()
@@ -25,6 +27,16 @@ class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
         groupName_TF.delegate = self
         
         groupName_TF.addTarget(self, action: #selector(Login_1_5_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        
+        //key
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillShow),
+                                                   name: UIResponder.keyboardWillShowNotification,
+                                                   object: nil)
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillHide),
+                                                   name: UIResponder.keyboardWillHideNotification,
+                                                   object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -45,6 +57,34 @@ class Login_1_5_ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    //key
+    @objc private func keyboardWillShow(_ notification: Notification) {
+
+        guard let keyboardHeight = notification.keyboardHeight,
+              let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            // アニメーションさせたい実装を行う
+            self.groupName_TF_Const.constant = keyboardHeight + 10
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            self.groupName_TF_Const.constant = 200
+        }
+    }
     
     
     //Alert

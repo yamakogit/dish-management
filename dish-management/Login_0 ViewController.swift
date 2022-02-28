@@ -16,8 +16,7 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var mail_TF :UITextField!
     @IBOutlet var user_TF :UITextField!
     @IBOutlet var pass_TF :UITextField!
-    @IBOutlet weak var mail_TF_Const: NSLayoutConstraint!  //key
-    @IBOutlet weak var user_TF_Const: NSLayoutConstraint!  //key
+    
     @IBOutlet weak var pass_TF_Const: NSLayoutConstraint!  //key
     
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
@@ -54,11 +53,12 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
         user_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pass_TF.addTarget(self, action: #selector(Login_0_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
+        //key
         NotificationCenter.default.addObserver(self,
                                                    selector: #selector(keyboardWillShow),
                                                    name: UIResponder.keyboardWillShowNotification,
                                                    object: nil)
-            NotificationCenter.default.addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                    selector: #selector(keyboardWillHide),
                                                    name: UIResponder.keyboardWillHideNotification,
                                                    object: nil)
@@ -154,7 +154,7 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
                        delay: 0,
                        options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
             // アニメーションさせたい実装を行う
-            self.pass_TF_Const.constant = keyboardHeight
+            self.pass_TF_Const.constant = keyboardHeight + 10
         }
     }
     
@@ -254,3 +254,5 @@ extension Notification {
         return self.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
     }
 }
+
+

@@ -11,7 +11,9 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class Login_1_6_ViewController: UIViewController {
+    
     @IBOutlet var groupID_Label: UILabel!
+    
     
     var activityIndicatorView = UIActivityIndicatorView()
     

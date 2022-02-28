@@ -396,6 +396,7 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         let imageRef = reference.child(path)
         
         let url = URL(string: "\(info[.imageURL] as! URL)")
+        
         print(url)
         if url == nil {
             print("失敗しました")
@@ -444,4 +445,14 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         
     }
     
+}
+
+extension UIImage {
+    //データサイズを変更する
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        return UIGraphicsImageRenderer(size: canvas, format: imageRendererFormat).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
 }

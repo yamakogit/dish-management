@@ -57,7 +57,7 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         
         dish_nameLabel.text = dishname
         createDateLabel.text = createddate
-        daysLeftLabel.text = vaildDays
+        daysLeftLabel.text = "\(vaildDays)日間"
         positionLabel.text = position
         memo_textView.text = memo
         

@@ -15,6 +15,8 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mail_TF: UITextField!
     @IBOutlet weak var pass_TF: UITextField!
     
+    @IBOutlet weak var passTF_Const: NSLayoutConstraint!  //key
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     var emailadress :String = ""
@@ -44,6 +46,17 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
         mail_TF.addTarget(self, action: #selector(Login_2_1_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pass_TF.addTarget(self, action: #selector(Login_2_1_ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         // Do any additional setup after loading the view.
+        
+        //key
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillShow),
+                                                   name: UIResponder.keyboardWillShowNotification,
+                                                   object: nil)
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillHide),
+                                                   name: UIResponder.keyboardWillHideNotification,
+                                                   object: nil)
+        
     }
     
     //TF
@@ -66,6 +79,34 @@ class Login_2_1_ViewController: UIViewController, UITextFieldDelegate {
             
     }
     
+    
+    //key
+    @objc private func keyboardWillShow(_ notification: Notification) {
+
+        guard let keyboardHeight = notification.keyboardHeight,
+              let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            // アニメーションさせたい実装を行う
+            self.passTF_Const.constant = keyboardHeight + 10
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            self.passTF_Const.constant = 230
+        }
+    }
     
     
     //Alert
