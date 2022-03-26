@@ -19,6 +19,15 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
     
     @IBOutlet weak var tableView: UITableView!
     
+    //Imageview_角丸設定
+    @IBOutlet weak var background_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var semiBackground_OrangeWood_Img: UIImageView!
+    @IBOutlet weak var user_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var groupID_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var groupName_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var mode_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var share_WhiteWood_Img: UIImageView!
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     let db = Firestore.firestore()
@@ -37,6 +46,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false  //tableView_選択不可
         
         //AIV
         activityIndicatorView.center = view.center
@@ -44,6 +54,15 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
         activityIndicatorView.color = .darkGray
         activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
+        
+        
+        background_WhiteWood_Img.layer.cornerRadius = 10
+        semiBackground_OrangeWood_Img.layer.cornerRadius = 10
+        user_WhiteWood_Img.layer.cornerRadius = 5
+        groupID_WhiteWood_Img.layer.cornerRadius = 5
+        groupName_WhiteWood_Img.layer.cornerRadius = 5
+        mode_WhiteWood_Img.layer.cornerRadius = 5
+        share_WhiteWood_Img.layer.cornerRadius = 5
         
     }
 //    override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +114,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                     self.username = document.data()!["username"] as! String
                     print("username: ",self.username)
                     
+                    self.username_Label.text = self.username
                     
                     
                     let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
@@ -117,7 +137,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                             print("ロード開始")
                             self.tableView.reloadData()
                             print("ロード完了")
-                            self.username_Label.text = self.username
+                            
                             self.groupID_Label.text = self.groupID
                             self.groupName_Label.text = self.groupName
                             
@@ -125,6 +145,10 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                             
                         } else {
                             print("Document does not exist")
+                            
+                            self.activityIndicatorView.stopAnimating()  //AIV
+                            self.alert(title: "エラー", message: "グループID・グループ名・グループメンバーの取得に失敗しました。")
+                            
                         }
                     }
                     
@@ -134,6 +158,9 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                     
                 } else {
                     print("Document does not exist")
+                    
+                    self.activityIndicatorView.stopAnimating()  //AIV
+                    self.alert(title: "エラー", message: "ユーザー名の取得に失敗しました。")
                 }
             }
             
@@ -195,6 +222,7 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
 
                 } else {
                     //成功
+                    
                 }
             }
         })
@@ -215,12 +243,84 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
         
     }
     
+    
+    
+    @IBAction func share_Button() {
+        activityIndicatorView.startAnimating()
+        
+        let shareletter = "おかず管理アプリ「つくろく」\n\nあなたのグループIDはこちら↓↓\n\(groupID)\n\n-----------------------------\n\nもう「つくろく」をダウンロードされましたか？？\n「つくろく」は、とっても便利なおかず管理アプリ！\nまだの方はこちらからどうぞ！↓↓\nhttps://tinyurl.com/tsukuroku"
+        
+        let shareItems = [shareletter] as [Any]
+        let controller = UIActivityViewController(activityItems:shareItems, applicationActivities: nil)
+        
+        activityIndicatorView.stopAnimating()
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func copy_Button() {
+        UIPasteboard.general.string = groupID
+        self.alert(title: "コピー完了", message: "グループIDを\nクリップボードにコピーしました")
+    }
+    
+    
+    
+    @IBAction func delete_Button() {
+        
+        activityIndicatorView.startAnimating()
+        
+        let user = Auth.auth().currentUser
 
-    @IBAction func instruction_Button() {
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+              
+              self.activityIndicatorView.stopAnimating()
+              self.alert(title: "エラー", message: "アカウント削除に失敗しました")
+              
+              
+              
+          } else {
+            // Account deleted.
+              
+              let alert: UIAlertController = UIAlertController(title: "アカウント削除完了",message: "アカウント削除処理が完了しました。\nトップページへ戻ります。", preferredStyle: UIAlertController.Style.alert)
+              let confilmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                  (action: UIAlertAction!) -> Void in
+                  
+                  
+                  guard let window = UIApplication.shared.keyWindow else { return }
+                  let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                  if window.rootViewController?.presentedViewController != nil {
+                      // モーダルを開いていたら閉じてから差し替え
+                      window.rootViewController?.dismiss(animated: true) {
+                          window.rootViewController = storyboard.instantiateInitialViewController()
+                      }
+                  } else {
+                      // モーダルを開いていなければそのまま差し替え
+                      window.rootViewController = storyboard.instantiateInitialViewController()
+                  }
+                  
+                  
+              })
+              
+              alert.addAction(confilmAction)
+              self.activityIndicatorView.stopAnimating()
+              //alertを表示
+              self.present(alert, animated: true, completion: nil)
+              
+          }
+        }
+                    
+                    
+                        
+        
         
     }
     
+    
     @IBAction func logout_Button() {
+        
+        activityIndicatorView.startAnimating()
+        
         let firebaseAuth = Auth.auth()
        do {
          try firebaseAuth.signOut()
@@ -250,12 +350,14 @@ class A_1_Home_Setting_ViewController: UIViewController, UITableViewDelegate, UI
                
                alert.addAction(confilmAction)
                
+           activityIndicatorView.stopAnimating()
                //alertを表示
                present(alert, animated: true, completion: nil)
            
            
        } catch let signOutError as NSError {
          print("Error signing out: %@", signOutError)
+           activityIndicatorView.stopAnimating()
            alert(title: "エラー", message: "ログアウトに失敗しました")
        }
     }

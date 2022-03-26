@@ -74,6 +74,23 @@ class Login_2_2_ViewController: UIViewController {
                     self.activityIndicatorView.stopAnimating()
                 } else {
                     print("Document does not exist")
+                    
+                    let alert: UIAlertController = UIAlertController(title: "エラー",message: "エラーが発生しました。\nログインし直してください。", preferredStyle: UIAlertController.Style.alert)
+                    let confilmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                        (action: UIAlertAction!) -> Void in
+                        
+                        self.navigationController?.popToRootViewController(animated: true)
+                        
+                    })
+                    
+                    alert.addAction(confilmAction)
+                    
+                    
+                    self.activityIndicatorView.stopAnimating()
+                    //alertを表示
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    
                 }
             }
             

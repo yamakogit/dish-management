@@ -18,6 +18,7 @@ class A_2_Dish_List_TableViewCell_VC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

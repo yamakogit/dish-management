@@ -18,8 +18,28 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     @IBOutlet weak var position_TF: UITextField!
     @IBOutlet var dishImg_imageView: UIImageView!
     @IBOutlet var memo_textView: UITextView!
-    
     @IBOutlet var createdDate_imageView: UIImageView!
+    
+    @IBOutlet var addPhoto_Button: UIButton!
+    
+    @IBOutlet weak var memo_textView_Const: NSLayoutConstraint!  //key
+    
+    
+    //ImageView_角丸設定
+    @IBOutlet weak var background_1_OrangeWood_Img: UIImageView!
+    @IBOutlet weak var background_2_OrangeWood_Img: UIImageView!
+    @IBOutlet weak var add_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var name_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var date_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var vaildDays_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var position_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var photo_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var memo_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var save_WhiteWood_Img: UIImageView!
+    
+    @IBOutlet weak var vaildDays_WhiteSquare_Img: UIImageView!
+    
+    
     
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     let createdDate_Formatter = DateFormatter()  //DP
@@ -99,19 +119,54 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         memo_textView.returnKeyType = .default
         memo_textView.delegate = self
         
+        
+        //key
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillShow),
+                                                   name: UIResponder.keyboardWillShowNotification,
+                                                   object: nil)
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillHide),
+                                                   name: UIResponder.keyboardWillHideNotification,
+                                                   object: nil)
+        
+        
+        //ImageView_角丸
+        background_1_OrangeWood_Img.layer.cornerRadius = 10  //角を角丸に設定
+        background_1_OrangeWood_Img.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        background_2_OrangeWood_Img.layer.cornerRadius = 10  //角を角丸に設定
+        background_2_OrangeWood_Img.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        add_WhiteWood_Img.layer.cornerRadius = 5
+        name_WhiteWood_Img.layer.cornerRadius = 5
+        date_WhiteWood_Img.layer.cornerRadius = 5
+        vaildDays_WhiteWood_Img.layer.cornerRadius = 5
+        position_WhiteWood_Img.layer.cornerRadius = 5
+        photo_WhiteWood_Img.layer.cornerRadius = 5
+        memo_WhiteWood_Img.layer.cornerRadius = 5
+        save_WhiteWood_Img.layer.cornerRadius = 28
+        
+        vaildDays_WhiteSquare_Img.layer.cornerRadius = 5
+        
+        dishImg_imageView.layer.cornerRadius = 5
+        memo_textView.layer.cornerRadius = 5
+        
+        
         // Do any additional setup after loading the view.
         
-        
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-
-            guard let user = user else {
-                
-                return
-            }
-            
-            self.userUid = user.uid
-        
-        }
+//        
+//        Auth.auth().addStateDidChangeListener{ (auth, user) in
+//
+//            guard let user = user else {
+//                
+//                return
+//            }
+//            
+//            self.userUid = user.uid
+//        
+//        }
+        self.userUid = UserDefaults.standard.string(forKey: "userUid") ?? "デフォルト値"
         
     }
     
@@ -143,6 +198,35 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
             position = textField.text!
             print("position: \(position)")
             
+        }
+    }
+    
+    
+    //key
+    @objc private func keyboardWillShow(_ notification: Notification) {
+
+        guard let keyboardHeight = notification.keyboardHeight,
+              let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            // アニメーションさせたい実装を行う
+            self.memo_textView_Const.constant = keyboardHeight + 5
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let keyboardAnimationDuration = notification.keybaordAnimationDuration,
+              let KeyboardAnimationCurve = notification.keyboardAnimationCurve
+        else { return }
+
+        UIView.animate(withDuration: keyboardAnimationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: KeyboardAnimationCurve)) {
+            self.memo_textView_Const.constant = 124
         }
     }
     
@@ -218,11 +302,10 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     }
     
     
-    
     @IBAction func save_Button() {
         
         if dishname == "" {
-            alert(title: "惣菜名が\n正しく入力されていません", message: "惣菜名を\nもう一度入れ直してください。")
+            alert(title: "おかず名が\n正しく入力されていません", message: "おかず名を\nもう一度入れ直してください。")
         } else if position == "" {
             alert(title: "場所が\n正しく入力されていません", message: "場所をもう一度\n入れ直してください。")
         } else if memoText == "" {
@@ -237,29 +320,29 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         
         activityIndicatorView.startAnimating()
         
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-
-            guard let user = user else {
-                
-                return
-            }
+//        Auth.auth().addStateDidChangeListener{ (auth, user) in
+//
+//            guard let user = user else {
+//
+//                return
+//            }
             
-            self.userUid = user.uid
+//            self.userUid = user.uid
             
             
             //Adultusersコレクション内の情報を取得
-            let docRef1 = self.db.collection("AdultUsers").document("\(self.userUid)")
+//            let docRef1 = self.db.collection("AdultUsers").document("\(self.userUid)")
             
-            docRef1.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let documentdata1 = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data1: \(documentdata1)")
+//            docRef1.getDocument { (document, error) in
+//                if let document = document, document.exists {
+//                    let documentdata1 = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data1: \(documentdata1)")
+//
+//
+//                    self.groupUid = document.data()!["groupUid"] as! String
+//                    print("groupUid: ",self.groupUid)
                     
-                   
-                    self.groupUid = document.data()!["groupUid"] as! String
-                    print("groupUid: ",self.groupUid)
-                    
-                    
+            self.groupUid = UserDefaults.standard.string(forKey: "groupUid") ?? "デフォルト値"  //var. 1.0.2
                     
                     
                     
@@ -305,23 +388,44 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                             print("succeed")
                             self.activityIndicatorView.stopAnimating()
                             
-                            self.alert(title: "保存しました", message: "新たな惣菜を\n保存しました。")
+                            let alert: UIAlertController = UIAlertController(title: "保存しました",message: "新たなおかずを保存しました。\nおかずリスト一覧へ戻ります。", preferredStyle: UIAlertController.Style.alert)
+                            let confilmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                                (action: UIAlertAction!) -> Void in
+                                
+                                UserDefaults.standard.set("fromAdd", forKey: "loadStatue")
+                                self.navigationController?.popToRootViewController(animated: true)
+                                
+                            })
+                            
+                            alert.addAction(confilmAction)
+                            
+                            //alertを表示
+                            self.present(alert, animated: true, completion: nil)
+                            
+                            
                         }
                     }
                     
                         } else {
                             print("Document does not exist")
+                            
+                            self.activityIndicatorView.stopAnimating()
+                            self.alert(title: "エラー", message: "おかずの保存に失敗しました")
+                            
                         }
                     }
                     
-                    } else {
-                        print("Document does not exist")
-                    }
-                }
+//                    } else {
+//                        print("Document does not exist")
+//
+//                        self.activityIndicatorView.stopAnimating()
+//                        self.alert(title: "エラー", message: "料理の保存に失敗しました")
+//                    }
+//                }
                 
                 
             
-            }
+//            }
             
             
             
@@ -330,12 +434,6 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         }
         // Do any addi
             
-            
-            
-                
-        
-        
-           //  ]) //userのuidをgroupコレクションに保存
 
     
                 
@@ -379,6 +477,7 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         
         dishImg = info[.originalImage] as! UIImage
         dishImg_imageView.image = dishImg
+        addPhoto_Button.setTitle("", for: .normal)
         print("ここまで正常")
         
         print(photoNumber)
@@ -400,6 +499,13 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         print(url)
         if url == nil {
             print("失敗しました")
+            
+            self.activityIndicatorView.stopAnimating()  //AIV
+            
+            alert(title: "エラー", message: "写真の取得に失敗しました。\n再度写真を選択し直してください")
+            print("失敗しました2")
+            self.dismiss(animated: true)
+            
         } else {
             print("成功しました")
             
@@ -417,6 +523,10 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
                         
                         print(self.downloadURL as Any)
                         UserDefaults.standard.set(self.photoNumber, forKey: "photoNumber")
+                        print("成功しました2")
+                        self.activityIndicatorView.stopAnimating()  //AIV
+                        self.dismiss(animated: true)
+                        
                     }
                 }
             }
@@ -426,8 +536,7 @@ extension A_2_Dish_Add_ViewController: UIImagePickerControllerDelegate, UINaviga
         }
         
         
-        activityIndicatorView.stopAnimating()  //AIV
-        self.dismiss(animated: true)
+        
         
 //        extension UIImageView {
 //            func getFileName() -> String? {

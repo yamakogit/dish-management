@@ -19,6 +19,9 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var pass_TF_Const: NSLayoutConstraint!  //key
     
+    //ImageView_各丸設定
+    @IBOutlet weak var Logo_Whitewood_Img: UIImageView!
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     var emailadress :String = ""
@@ -62,6 +65,9 @@ class Login_0_ViewController: UIViewController, UITextFieldDelegate {
                                                    selector: #selector(keyboardWillHide),
                                                    name: UIResponder.keyboardWillHideNotification,
                                                    object: nil)
+        
+        //ImageView_角丸設定
+        Logo_Whitewood_Img.layer.cornerRadius = 10
         
         
         // Do any additional setup after loading the view.

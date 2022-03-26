@@ -18,6 +18,16 @@ class A_2_Dish_Detail_ViewController: UIViewController {
     @IBOutlet var memo_textView: UITextView!
     
     
+    @IBOutlet weak var background_OrangeWood_Img: UIImageView!
+    @IBOutlet weak var dishName_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var dishImage_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var createdDate_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var days_Img: UIImageView!
+    
+    @IBOutlet weak var position_WhiteWood_Img: UIImageView!
+    @IBOutlet weak var memo_WhiteWood_Img: UIImageView!
+    
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     
@@ -37,12 +47,30 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         
         activityIndicatorView.startAnimating()  //AIV
         
+        background_OrangeWood_Img.layer.cornerRadius = 10
+        dishName_WhiteWood_Img.layer.cornerRadius = 5
+        dishImage_WhiteWood_Img.layer.cornerRadius = 5
+        createdDate_WhiteWood_Img.layer.cornerRadius = 5
+        days_Img.layer.cornerRadius = 5
+        position_WhiteWood_Img.layer.cornerRadius = 5
+        memo_WhiteWood_Img.layer.cornerRadius = 5
+        
+        dishImg_imageView.layer.cornerRadius = 5
+        memo_textView.layer.cornerRadius = 5
+        
         // Do any additional setup after loading the view.
         let dishname = selectedDishesData["dishname"] as! String
         let createddate = selectedDishesData["createddate"] as! String
         let vaildDays = selectedDishesData["vaildDays"] as! String
         let position = selectedDishesData["position"] as! String
         let memo = selectedDishesData["memo"] as! String
+        
+        let photourl1 = selectedDishesData["photo"]
+        
+        if photourl1 is NSNull == true {
+            dishImg_imageView.image = UIImage(named: "Image_before")!
+        } else {
+        
         
         let photourl = selectedDishesData["photo"] as! String
         
@@ -53,13 +81,17 @@ class A_2_Dish_Detail_ViewController: UIViewController {
                 // 画像をセットする
                 dishImg_imageView.image = UIImage(data: imageData)!
         
-        
+        }
         
         dish_nameLabel.text = dishname
         createDateLabel.text = createddate
         daysLeftLabel.text = "\(vaildDays)日間"
         positionLabel.text = position
         memo_textView.text = memo
+        
+        memo_textView.isEditable = false
+        
+        UserDefaults.standard.set("fromDetail", forKey: "loadStatue")
         
         activityIndicatorView.stopAnimating()  //AIV
         

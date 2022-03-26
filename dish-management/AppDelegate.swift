@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
         
+        sleep(2)
+        
         return true
     }
 

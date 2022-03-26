@@ -141,7 +141,7 @@ class Login_1_3_ViewController: UIViewController, UITextFieldDelegate {
                     
                     self.activityIndicatorView.stopAnimating()  //AIV
                     self.activityIndicatorView.isHidden = true
-                    self.alert(title: "エラー", message: "グルーピが見つかりません。\nもう一度、groupIDを\n正しく入力してください。")
+                    self.alert(title: "エラー", message: "グループが見つかりません。\nもう一度、groupIDを\n正しく入力してください。")
                 } else {
                     for document in QuerySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")

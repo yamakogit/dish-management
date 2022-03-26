@@ -18,10 +18,13 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var background_WhiteWood_Img: UIImageView!
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
-    var userUid: String = ""
+    var loadStatue: String = ""
     var groupUid: String = ""
+    
     var dishesDataSecond_Array: [[String: Any]] = []
     var dishesData_Array: Array<Any> = []
     
@@ -46,47 +49,86 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
         
+        background_WhiteWood_Img.layer.cornerRadius = 10  //角を角丸に設定
+        background_WhiteWood_Img.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        getList()
+        
         // Do any additional setup after loading the view.
     }
-    
-    
-     /*要復活
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#> // tableViewの記載内容を記入
-    }
-      */
+
     
 
     override func viewWillAppear(_ animated: Bool) {
         
+        self.loadStatue = UserDefaults.standard.string(forKey: "loadStatue") ?? "NoData"
+        
+        if loadStatue == "fromAdd" {
+            getList()
+            UserDefaults.standard.set("default", forKey: "loadStatue")
+        } else if loadStatue == "fromDetail" {
+            activityIndicatorView.stopAnimating()
+            UserDefaults.standard.set("default", forKey: "loadStatue")
+        } else {
+            UserDefaults.standard.set("default", forKey: "loadStatue")
+        }
+    }
+    
+    
+    //Alert
+    var alertController: UIAlertController!
+    
+    //Alert
+    func alert(title:String, message:String) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dishesDataSecond_Array.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "List") as! A_2_Dish_List_TableViewCell_VC
+        let dishname = dishesDataSecond_Array[indexPath.row]["dishname"] as! String
+        cell.dish_nameLabel?.text = "\(dishname)"
+        let position = dishesDataSecond_Array[indexPath.row]["position"] as! String
+        cell.createdDateLabel?.text = "場所: \(position)"
+        let vaildDays = dishesDataSecond_Array[indexPath.row]["vaildDays"] as! String
+        cell.daysLeftLabel?.text = "\(vaildDays)日間有効"
+        
+        let photourl1 = dishesDataSecond_Array[indexPath.row]["photo"]
+        
+        
+        if photourl1 is NSNull == true {
+            cell.dish_imageView.image = UIImage(named: "Image_before")!
+        } else {
+            let photourl = dishesDataSecond_Array[indexPath.row]["photo"] as! String
+        let imageUrl:URL = URL(string:photourl)!
+                // URL型からData型に変換
+                let imageData:Data = try! Data(contentsOf: imageUrl)
+        
+                // 画像をセットする
+            cell.dish_imageView.image = UIImage(data: imageData)!
+            
+        }
+        cell.dish_imageView.layer.cornerRadius = 5  //角を角丸に設定
+        
+        
+        
+//        cell.accessoryType = .disclosureIndicator  //cellの横に > が表示されるように設定
+        return cell  //cellの戻り値を設定
+    }
+    
+    //var. 1.0.2
+    func getList() {
+        
         activityIndicatorView.startAnimating()  //AIV
         
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-
-            guard let user = user else {
-                
-                return
-            }
-            
-            self.userUid = user.uid
-            
-            
-            
-            
-            //Adultusersコレクション内の情報を取得
-            let docRef1 = self.db.collection("AdultUsers").document("\(self.userUid)")
-            
-            docRef1.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let documentdata1 = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data1: \(documentdata1)")
-                    
-                   
-                    self.groupUid = document.data()!["groupUid"] as! String
-                    print("groupUid: ",self.groupUid)
-                    
-                    
-                    
+                    self.groupUid = UserDefaults.standard.string(forKey: "groupUid") ?? "デフォルト値"  //var. 1.0.2
                     
                     let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
 
@@ -106,61 +148,85 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
                     
                         } else {
                             print("Document does not exist")
+                            
+                            self.activityIndicatorView.stopAnimating()  //AIV
+                            self.alert(title: "エラー", message: "おかず一覧を取得できませんでした")
+                            
                         }
                     }
-                    
-                    } else {
-                        print("Document does not exist")
-                    }
-                }
-                
-            }
         
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dishesDataSecond_Array.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "List") as! A_2_Dish_List_TableViewCell_VC
-        let dishname = dishesDataSecond_Array[indexPath.row]["dishname"] as! String
-        cell.dish_nameLabel?.text = "\(dishname)"
-        let position = dishesDataSecond_Array[indexPath.row]["position"] as! String
-        cell.createdDateLabel?.text = "場所: \(position)"
-        let vaildDays = dishesDataSecond_Array[indexPath.row]["vaildDays"] as! String
-        cell.daysLeftLabel?.text = "あと\(vaildDays)日"
-        
-        let photourl = dishesDataSecond_Array[indexPath.row]["photo"] as! String
-        
-        let imageUrl:URL = URL(string:photourl)!
-                // URL型からData型に変換
-                let imageData:Data = try! Data(contentsOf: imageUrl)
-        
-                // 画像をセットする
-                cell.dish_imageView.image = UIImage(data: imageData)!
-        
-        
-        
-        
-//        cell.accessoryType = .disclosureIndicator  //cellの横に > が表示されるように設定
-        return cell  //cellの戻り値を設定
-    }
-    
-    
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath){
+    //S_infoボタン(accessoryButton)タップ時の挙動
+    /*
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         
         self.activityIndicatorView.startAnimating()  //AIV
         
         let selectedDishesData = dishesDataSecond_Array[indexPath.row]
         
-        self.activityIndicatorView.stopAnimating()  //AIV
+        performSegue(withIdentifier: "toDetail", sender: selectedDishesData)
+        
+}
+     */
+    //E_infoボタン(accessoryButton)タップ時の挙動
+    
+    //S_セルタップ時の挙動
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.activityIndicatorView.startAnimating()  //AIV
+        
+        let selectedDishesData = dishesDataSecond_Array[indexPath.row]
         
         performSegue(withIdentifier: "toDetail", sender: selectedDishesData)
         
 }
+    //E_セルタップ時の挙動
+    
+    
+    //セル削除機能↓
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            
+            activityIndicatorView.startAnimating()
+            
+            dishesDataSecond_Array.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            
+            let ref = self.db.collection("Group")
+            
+                    ref.document(self.groupUid).updateData(
+                        ["dishes" : self.dishesDataSecond_Array])
+            
+            { err in
+                if let err = err {
+                    //失敗
+                    
+                    self.activityIndicatorView.stopAnimating()
+                    self.alert(title: "エラー", message: "おかずの削除に失敗しました。")
+                    print("削除失敗")
+                } else {
+                    //成功
+                    self.activityIndicatorView.stopAnimating()
+                    print("削除成功")
+                    
+                }
+            }
+            
+            
+            
+            tableView.reloadData()  //tableViewを読み込み直している
+        }
+        
+    }
+    //セル削除機能↑
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -177,6 +243,9 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         self.performSegue(withIdentifier: "go-A2DA", sender: nil)
     }
     
+    @IBAction func reloadList() {
+        getList()
+    }
     
     
     /*

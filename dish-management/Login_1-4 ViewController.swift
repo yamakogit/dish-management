@@ -47,6 +47,18 @@ class Login_1_4_ViewController: UIViewController {
         
     }
     
+    
+    //Alert
+    var alertController: UIAlertController!
+    
+    //Alert
+    func alert(title:String, message:String) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true)
+    }
+    
+    
     @IBAction func gonext() {
         
         activityIndicatorView.startAnimating()  //AIV
@@ -126,6 +138,22 @@ class Login_1_4_ViewController: UIViewController {
                     
                         } else {
                             print("Document does not exist")
+                            
+                            let alert: UIAlertController = UIAlertController(title: "エラー",message: "エラーが発生しました。\nログインし直してください。", preferredStyle: UIAlertController.Style.alert)
+                            let confilmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                                (action: UIAlertAction!) -> Void in
+                                
+                                self.navigationController?.popToRootViewController(animated: true)
+                                
+                            })
+                            
+                            alert.addAction(confilmAction)
+                            
+                            self.activityIndicatorView.stopAnimating()
+                            //alertを表示
+                            self.present(alert, animated: true, completion: nil)
+                            
+                            
                         }
                     }
                 

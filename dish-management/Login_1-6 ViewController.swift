@@ -57,25 +57,46 @@ class Login_1_6_ViewController: UIViewController {
         
         groupID_Label.text = groupID
         
+        
+        var handle: AuthStateDidChangeListenerHandle?
+
+        
+        
         print ("groupID: \(groupID)")
         
         
         
         
+        //Alert
+        var alertController: UIAlertController!
+        
+        //Alert
+        func alert(title:String, message:String) {
+            alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true)
+        }
         
         
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
 
+            print("Auth起動完了")
+            
+            
             guard let user = user else {
+                print("コッコs")
                 return
             }
-            
+            print("ここ")
             //ここでGroupコレクションを作成
             let ref = self.db.collection("Group")
+            print("小国家")
             
             let createduid = self.db.collection("Group").document().documentID
             print("createduid: \(createduid)")
             
+            
+            print("ここまで２")
             ref.document(createduid).setData( //ここでgroupのuidをランダム作成
                                                             ["groupID" : "\(self.groupID)", //groupIDを保存
                                                              "groupName" : "\(self.groupname)", //group名を保存
@@ -84,6 +105,7 @@ class Login_1_6_ViewController: UIViewController {
             
             
             
+            print("ここまで３")
             let ref2 = self.db.collection("\(self.mode)")
             
             ref2.document(user.uid).setData([  //作成済のAdultUsersコレクションのAuthのuidに...
@@ -95,16 +117,22 @@ class Login_1_6_ViewController: UIViewController {
             { err in
                 if let err = err {
                     //失敗
+                    
+                    self.activityIndicatorView.stopAnimating()  //AIV
+                    
+                    alert(title: "エラー", message: "正常にグループを作成できませんでした。")
 
                 } else {
+                    
                     //成功
                     print("succeed")
                     self.checkNumber = 1
+                    Auth.auth().removeStateDidChangeListener(handle!)
                     self.activityIndicatorView.stopAnimating()  //AIV
+                    
                 }
             }
         }
-        
         
         
     }
