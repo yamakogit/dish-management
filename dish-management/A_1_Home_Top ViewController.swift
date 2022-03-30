@@ -144,70 +144,70 @@ class A_1_Home_Top_ViewController: UIViewController, UITableViewDelegate, UITabl
                     }
                 }
         
-        self.activityIndicatorView.startAnimating()  //AIV
-        
-        //現在の料理数表示
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-
-            guard let user = user else {
-                
-                return
-            }
-            
-            self.userUid = user.uid
-            
-            
-            
-            
-            //Adultusersコレクション内の情報を取得
-            let docRef2 = self.db.collection("AdultUsers").document("\(self.userUid)")
-            
-            docRef2.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let documentdata2 = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data2: \(documentdata2)")
-                    
-                   
-                    self.groupUid = document.data()!["groupUid"] as! String
-                    print("groupUid: ",self.groupUid)
-                    
-                    UserDefaults.standard.set(self.groupUid, forKey: "groupUid")  //var. 1.0.2
-                    UserDefaults.standard.set(self.userUid, forKey: "userUid")  //var. 1.0.2
-                    
-                    let docRef3 = self.db.collection("Group").document("\(self.groupUid)")
-
-                    docRef3.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            let documentdata3 = document.data().map(String.init(describing:)) ?? "nil"
-                            print("Document data3: \(documentdata3)")
-                            
-                            
-                            self.dishesData_Array = document.data()!["dishes"] as? Array<Any> ?? []
-                            
-                            print("dish_Array: \(self.dishesData_Array)")
-                            self.dishesDataSecond_Array = self.dishesData_Array as! [[String: Any]]
-                            
-                            self.currentnumber_Label.text = "\(self.dishesData_Array.count)"
-                            
-                            self.activityIndicatorView.stopAnimating()  //AIV
-                    
-                        } else {
-                            print("Document3 does not exist")
-                            
-                            self.activityIndicatorView.stopAnimating()  //AIV
-                            self.alert(title: "エラー", message: "現在のおかず数の取得に失敗しました")
-                        }
-                    }
-                    
-                    } else {
-                        print("Document2 does not exist")
-                        
-                        self.activityIndicatorView.stopAnimating()  //AIV
-                        self.alert(title: "エラー", message: "現在のおかず数の取得に失敗しました")
-                    }
-                }
-                
-            }
+//        self.activityIndicatorView.startAnimating()  //AIV
+//
+//        //現在の料理数表示
+//        Auth.auth().addStateDidChangeListener{ (auth, user) in
+//
+//            guard let user = user else {
+//
+//                return
+//            }
+//
+//            self.userUid = user.uid
+//
+//
+//
+//
+//            //Adultusersコレクション内の情報を取得
+//            let docRef2 = self.db.collection("AdultUsers").document("\(self.userUid)")
+//
+//            docRef2.getDocument { (document, error) in
+//                if let document = document, document.exists {
+//                    let documentdata2 = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data2: \(documentdata2)")
+//
+//
+//                    self.groupUid = document.data()!["groupUid"] as! String
+//                    print("groupUid: ",self.groupUid)
+//
+//                    UserDefaults.standard.set(self.groupUid, forKey: "groupUid")  //var. 1.0.2
+//                    UserDefaults.standard.set(self.userUid, forKey: "userUid")  //var. 1.0.2
+//
+//                    let docRef3 = self.db.collection("Group").document("\(self.groupUid)")
+//
+//                    docRef3.getDocument { (document, error) in
+//                        if let document = document, document.exists {
+//                            let documentdata3 = document.data().map(String.init(describing:)) ?? "nil"
+//                            print("Document data3: \(documentdata3)")
+//
+//
+//                            self.dishesData_Array = document.data()!["dishes"] as? Array<Any> ?? []
+//
+//                            print("dish_Array: \(self.dishesData_Array)")
+//                            self.dishesDataSecond_Array = self.dishesData_Array as! [[String: Any]]
+//
+//                            self.currentnumber_Label.text = "\(self.dishesData_Array.count)"
+//
+//                            self.activityIndicatorView.stopAnimating()  //AIV
+//
+//                        } else {
+//                            print("Document3 does not exist")
+//
+//                            self.activityIndicatorView.stopAnimating()  //AIV
+//                            self.alert(title: "エラー", message: "現在のおかず数の取得に失敗しました")
+//                        }
+//                    }
+//
+//                    } else {
+//                        print("Document2 does not exist")
+//
+//                        self.activityIndicatorView.stopAnimating()  //AIV
+//                        self.alert(title: "エラー", message: "現在のおかず数の取得に失敗しました")
+//                    }
+//                }
+//
+//            }
         
         
         

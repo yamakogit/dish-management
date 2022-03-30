@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import SafariServices
 
-class A_1_Home_News_ViewController: UIViewController {
+class A_1_Home_News_ViewController: UIViewController, SFSafariViewControllerDelegate {
 
     @IBOutlet var title_Label: UILabel!
     @IBOutlet var date_Label: UILabel!
     @IBOutlet var content_textView: UITextView!
+    @IBOutlet var urlTitle_Label: UILabel!  //var. 1.0.3
     
     @IBOutlet weak var whiteWood: UIImageView!
     
@@ -20,6 +22,8 @@ class A_1_Home_News_ViewController: UIViewController {
     
     var selectedNewsData: [String: Any] = [:]
     
+    var url: String = ""
+    var urlType: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +47,14 @@ class A_1_Home_News_ViewController: UIViewController {
         let date = selectedNewsData["date"] as! String
         let content = selectedNewsData["content"] as! String
         
+        let urlTitle = selectedNewsData["urlTitle"] as! String  //var. 1.0.3
+        url = selectedNewsData["url"] as! String  //var. 1.0.3
+        urlType = selectedNewsData["urlType"] as! String  //var. 1.0.3
+        
         title_Label.text = title
         date_Label.text = date
+        urlTitle_Label.text = urlTitle  //var. 1.0.3
+        
         content_textView.text = content.replacingOccurrences(of: "\\n", with: "\n")
         
         content_textView.isEditable = false
@@ -53,6 +63,32 @@ class A_1_Home_News_ViewController: UIViewController {
         
         
     }
+    
+    @IBAction func urlButtonTapped_Button() {  //var. 1.0.3
+        
+        if urlType == "inApp" {
+            
+            let url = NSURL(string: "\(url)")
+            if let url = url {
+                let safariViewController = SFSafariViewController(url: url as URL)
+                safariViewController.delegate = self
+                present(safariViewController, animated: true, completion: nil)
+            }
+            
+        } else if urlType == "Safari" {
+            
+            let url = URL(string: "\(url)")!
+            if UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url)
+            }
+            
+        }
+        
+    }  //var. 1.0.3
+    
+    
+    
+    
     
 
     /*
