@@ -20,6 +20,9 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var background_WhiteWood_Img: UIImageView!
     
+    @IBOutlet weak var charactor_Img: UIImageView!
+    @IBOutlet weak var noDish_Label: UILabel!
+    
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
     var loadStatue: String = ""
@@ -87,7 +90,21 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if self.dishesDataSecond_Array.count == 0 {
+            let charactor_randomInt: Int = Int.random(in: 1...4)
+            self.charactor_Img.image = UIImage(named: "charactor_\(charactor_randomInt)")!
+            
+            self.charactor_Img.isHidden = false
+            self.noDish_Label.isHidden = false
+        } else {
+            self.charactor_Img.isHidden = true
+            self.noDish_Label.isHidden = true
+        }
+        
+        
         return dishesDataSecond_Array.count
+        
     }
     
     
@@ -143,6 +160,9 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
                             print("dish_Array: \(self.dishesData_Array)")
                             self.dishesDataSecond_Array = self.dishesData_Array as! [[String: Any]]
                             self.tableView.reloadData()
+                            
+                            
+                            
                             
                             self.activityIndicatorView.stopAnimating()  //AIV
                     

@@ -2296,6 +2296,25 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteWood" translatesAutoresizingMaskIntoConstraints="NO" id="IIC-1A-IBb" userLabel="Background_WhiteWood_Img">
                                 <rect key="frame" x="10" y="93" width="394" height="793"/>
                             </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjp-IY-r33">
+                                <rect key="frame" x="57" y="478" width="300" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="FNx-Ro-shv"/>
+                                    <constraint firstAttribute="width" constant="300" id="SCX-cZ-AKX"/>
+                                </constraints>
+                                <string key="text">現在、
+おかずはありません</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="coE-VE-DdN">
+                                <rect key="frame" x="107" y="318" width="200" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="4SH-ku-5C6"/>
+                                    <constraint firstAttribute="height" constant="160" id="E4Z-cj-yX6"/>
+                                </constraints>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yd1-yt-Ygz">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2376,9 +2395,13 @@
                             <constraint firstItem="gTS-43-PzI" firstAttribute="trailing" secondItem="IIC-1A-IBb" secondAttribute="trailing" constant="10" id="HgX-L4-AJb"/>
                             <constraint firstItem="IIC-1A-IBb" firstAttribute="top" secondItem="gTS-43-PzI" secondAttribute="top" constant="5" id="NGa-eA-hLx"/>
                             <constraint firstAttribute="bottom" secondItem="Yd1-yt-Ygz" secondAttribute="bottom" id="WEL-qb-Uwp"/>
+                            <constraint firstItem="cjp-IY-r33" firstAttribute="centerX" secondItem="P61-XQ-ido" secondAttribute="centerX" id="XJ7-ud-gC6"/>
+                            <constraint firstItem="cjp-IY-r33" firstAttribute="top" secondItem="coE-VE-DdN" secondAttribute="bottom" id="cM8-rx-Qkj"/>
                             <constraint firstAttribute="bottom" secondItem="IIC-1A-IBb" secondAttribute="bottom" constant="10" id="iCc-Y4-mi4"/>
                             <constraint firstItem="gTS-43-PzI" firstAttribute="trailing" secondItem="Yd1-yt-Ygz" secondAttribute="trailing" id="p77-b9-PGw"/>
+                            <constraint firstItem="coE-VE-DdN" firstAttribute="centerY" secondItem="P61-XQ-ido" secondAttribute="centerY" constant="-50" id="paZ-Tq-xDc"/>
                             <constraint firstItem="Yd1-yt-Ygz" firstAttribute="leading" secondItem="gTS-43-PzI" secondAttribute="leading" id="qtu-KI-Pii"/>
+                            <constraint firstItem="coE-VE-DdN" firstAttribute="centerX" secondItem="P61-XQ-ido" secondAttribute="centerX" id="uK4-cT-Ynb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="おかずリスト" id="USs-ZX-ftF">
@@ -2401,6 +2424,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="background_WhiteWood_Img" destination="IIC-1A-IBb" id="C3m-Td-BXz"/>
+                        <outlet property="charactor_Img" destination="coE-VE-DdN" id="vhA-Kg-3fd"/>
+                        <outlet property="noDish_Label" destination="cjp-IY-r33" id="OZR-7l-XWg"/>
                         <outlet property="tableView" destination="Yd1-yt-Ygz" id="seQ-xN-fE0"/>
                         <segue destination="btS-2t-h5k" kind="show" identifier="go-A2DA" id="B0n-jm-jgF"/>
                         <segue destination="BBq-8Z-dZj" kind="show" identifier="toDetail" id="w8f-CD-e9P"/>

@@ -30,6 +30,8 @@ class Login_1_6_ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        self.navigationItem.hidesBackButton = true
+        
         activityIndicatorView.center = view.center
         activityIndicatorView.style = .whiteLarge
         activityIndicatorView.color = .darkGray
