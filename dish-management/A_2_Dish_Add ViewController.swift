@@ -253,6 +253,9 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         createdDate_Formatter.dateFormat = "yyyy/MM/dd"
         createdDate = createdDate_Formatter.string(from: createdDate_DatePicker.date)
         print("日時設定: \(createdDate)")
+        
+        
+        
     }
     
     
@@ -445,9 +448,19 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         
         activityIndicatorView.startAnimating()
         
+        let createdDate_DateType = createdDate_Formatter.date(from: createdDate)!
+        print(createdDate_DateType)
+        
+        let vaildDays_Int = Int(vaildDays)!
+        
+        let vaildDate_DateType = Calendar.current.date(byAdding: .day, value: vaildDays_Int, to: createdDate_DateType)!
+        print("ここで",vaildDate_DateType)
+        
+        let vaildDate_String = createdDate_Formatter.string(from: vaildDate_DateType)
+        print(vaildDate_String)
+        
+        
         self.groupUid = UserDefaults.standard.string(forKey: "groupUid") ?? "デフォルト値"  //var. 1.0.2
-                
-                
                 
                 let docRef2 = self.db.collection("Group").document("\(self.groupUid)")
 
@@ -461,6 +474,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                             "dishname": self.dishname,
                             "createddate": self.createdDate,
                             "vaildDays": self.vaildDays,
+                            "vaildDate": vaildDate_String,
                             "position": self.position,
                             "photo": self.downloadURL,
                             "memo": self.memoText

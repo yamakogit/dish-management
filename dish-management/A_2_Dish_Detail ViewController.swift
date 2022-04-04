@@ -30,6 +30,8 @@ class A_2_Dish_Detail_ViewController: UIViewController {
     
     var activityIndicatorView = UIActivityIndicatorView()  //AIV
     
+    let vaildDate_Formatter = DateFormatter()
+    var daysLeftLabel_Text = ""
     
     var selectedDishesData: [String: Any] = [:]
     let storage = Storage.storage()
@@ -61,9 +63,57 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         // Do any additional setup after loading the view.
         let dishname = selectedDishesData["dishname"] as! String
         let createddate = selectedDishesData["createddate"] as! String
-        let vaildDays = selectedDishesData["vaildDays"] as! String
+//        let vaildDays = selectedDishesData["vaildDays"] as! String
         let position = selectedDishesData["position"] as! String
         let memo = selectedDishesData["memo"] as! String
+        
+        
+        let vaildDate_String = selectedDishesData["vaildDate"] as? String
+        vaildDate_Formatter.dateFormat = "yyyy/MM/dd"
+        
+        if vaildDate_String == nil {
+            
+            let vaildDays = selectedDishesData["vaildDays"] as! String
+            daysLeftLabel.text = "\(vaildDays)日間有効"
+            print("nilである")
+            
+        } else {
+            
+            let vaildDate_DateType = vaildDate_Formatter.date(from: vaildDate_String!)!
+        print(vaildDate_DateType)
+        
+        let today = Date()
+        let today_String = vaildDate_Formatter.string(from: today)
+        let today_DateType = vaildDate_Formatter.date(from: today_String)!
+        
+        let elapsedDays = Calendar.current.dateComponents([.day], from: today_DateType, to: vaildDate_DateType).day!
+        print("vaildDate_String: ",vaildDate_String)
+        print("today_DateType: ",today_DateType)
+        print("vaildDate_DateType: ",vaildDate_DateType)
+            
+            
+            if elapsedDays == 1 {
+                //明日まで
+                daysLeftLabel_Text = "明日まで"
+                
+            } else if elapsedDays == 0 {
+                //今日まで
+                daysLeftLabel_Text = "今日まで"
+                
+            } else if elapsedDays <= 0 {
+                //期限超過
+                daysLeftLabel_Text = "期限超過"
+                daysLeftLabel.textColor = UIColor.systemPurple
+                
+            } else {
+                let elapsedDays_String = String(elapsedDays)
+                daysLeftLabel_Text = "あと\(elapsedDays_String)日"
+            }
+            
+            daysLeftLabel.text = daysLeftLabel_Text
+            
+            }
+        
         
         let photourl1 = selectedDishesData["photo"]
         
@@ -85,7 +135,7 @@ class A_2_Dish_Detail_ViewController: UIViewController {
         
         dish_nameLabel.text = dishname
         createDateLabel.text = createddate
-        daysLeftLabel.text = "\(vaildDays)日間"
+//        daysLeftLabel.text = "\(vaildDays)日間"
         positionLabel.text = position
         memo_textView.text = memo
         

@@ -28,8 +28,12 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     var loadStatue: String = ""
     var groupUid: String = ""
     
+    var daysLeftLabel_Text: String = ""
+    
     var dishesDataSecond_Array: [[String: Any]] = []
     var dishesData_Array: Array<Any> = []
+    
+    let vaildDate_Formatter = DateFormatter()
     
     
     
@@ -114,8 +118,52 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         cell.dish_nameLabel?.text = "\(dishname)"
         let position = dishesDataSecond_Array[indexPath.row]["position"] as! String
         cell.createdDateLabel?.text = "場所: \(position)"
-        let vaildDays = dishesDataSecond_Array[indexPath.row]["vaildDays"] as! String
-        cell.daysLeftLabel?.text = "\(vaildDays)日間有効"
+        
+        let vaildDate_String = dishesDataSecond_Array[indexPath.row]["vaildDate"] as? String
+        vaildDate_Formatter.dateFormat = "yyyy/MM/dd"
+        
+        if vaildDate_String == nil {
+            
+            let vaildDays = dishesDataSecond_Array[indexPath.row]["vaildDays"] as! String
+            cell.daysLeftLabel?.text = "\(vaildDays)日間有効"
+            print("nilである")
+            
+        } else {
+            
+            let vaildDate_DateType = vaildDate_Formatter.date(from: vaildDate_String!)!
+        print(vaildDate_DateType)
+        
+        let today = Date()
+        let today_String = vaildDate_Formatter.string(from: today)
+        let today_DateType = vaildDate_Formatter.date(from: today_String)!
+        
+        let elapsedDays = Calendar.current.dateComponents([.day], from: today_DateType, to: vaildDate_DateType).day!
+        print("vaildDate_String: ",vaildDate_String)
+        print("today_DateType: ",today_DateType)
+        print("vaildDate_DateType: ",vaildDate_DateType)
+            
+            
+            if elapsedDays == 1 {
+                //明日まで
+                daysLeftLabel_Text = "明日まで"
+                
+            } else if elapsedDays == 0 {
+                //今日まで
+                daysLeftLabel_Text = "今日まで"
+                
+            } else if elapsedDays <= 0 {
+                //期限超過
+                daysLeftLabel_Text = "期限超過"
+                cell.daysLeftLabel?.textColor = UIColor.systemPurple
+                
+            } else {
+                let elapsedDays_String = String(elapsedDays)
+                daysLeftLabel_Text = "あと\(elapsedDays_String)日"
+            }
+            
+            cell.daysLeftLabel?.text = daysLeftLabel_Text
+            
+            }
         
         let photourl1 = dishesDataSecond_Array[indexPath.row]["photo"]
         
