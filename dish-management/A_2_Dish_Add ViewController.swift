@@ -283,7 +283,40 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     
     @IBAction func addPhoto_Button_Tapped() {
 
-        choosePhoto()
+        let alert: UIAlertController = UIAlertController(title: "写真を設定",message: "写真の設定方法を\n選択してください。", preferredStyle: UIAlertController.Style.alert)
+        let choosePhotoAction: UIAlertAction = UIAlertAction(title: "フォトライブラリから選択", style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            
+            self.choosePhoto()
+            
+        })
+        
+        let takePhotoAction: UIAlertAction = UIAlertAction(title: "カメラで撮影", style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            
+            self.takePhoto()
+            
+        })
+        
+        let deletePhotoAction: UIAlertAction = UIAlertAction(title: "写真設定を解除", style: UIAlertAction.Style.destructive, handler:{
+            (action: UIAlertAction!) -> Void in
+            
+            self.deletePhoto()
+            
+        })
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:nil)
+        
+        
+        alert.addAction(choosePhotoAction)
+        alert.addAction(takePhotoAction)
+        alert.addAction(deletePhotoAction)
+        alert.addAction(cancelAction)
+        
+        
+        //alertを表示
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     //PhotoLibralyの表示
@@ -297,6 +330,24 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
             present(picker, animated: true)
             
         }
+    }
+    
+    func takePhoto() {
+        let camera = UIImagePickerController.SourceType.camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(camera){
+            let picker = UIImagePickerController()
+            picker.sourceType = camera
+            picker.delegate = self
+            self.present(picker, animated: true)
+        }
+    }
+    
+    func deletePhoto() {
+        downloadURL = nil
+        dishImg_imageView.image = UIImage(named: "Image_before")!
+        addPhoto_Button.setTitle("タップして\n写真を選択してください", for: .normal)
+        addPhoto_Button.titleLabel?.textAlignment = NSTextAlignment.center
     }
     
     
