@@ -47,6 +47,9 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
     let photoDate_Formatter = DateFormatter()
     var photoDate: String = ""
     
+    let dishID_Formatter = DateFormatter()
+    var dishIDDate: String = ""
+    
     let db = Firestore.firestore()
     let storage = Storage.storage()
     
@@ -459,6 +462,10 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         let vaildDate_String = createdDate_Formatter.string(from: vaildDate_DateType)
         print(vaildDate_String)
         
+        var nowtime = Date()
+        dishID_Formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dishIDDate = photoDate_Formatter.string(from: nowtime)
+        
         
         self.groupUid = UserDefaults.standard.string(forKey: "groupUid") ?? "デフォルト値"  //var. 1.0.2
                 
@@ -477,7 +484,8 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
                             "vaildDate": vaildDate_String,
                             "position": self.position,
                             "photo": self.downloadURL,
-                            "memo": self.memoText
+                            "memo": self.memoText,
+                            "dishID": self.dishIDDate
                         ]
                         
                         

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
@@ -35,7 +36,7 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
     
     let vaildDate_Formatter = DateFormatter()
     
-    
+    var request: UNNotificationRequest!
     
     let storage = Storage.storage()
     let db = Firestore.firestore()
@@ -60,6 +61,33 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         background_WhiteWood_Img.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         getList()
+        
+        
+//        let targetDate = Calendar.current.dateComponents(
+//                    [.year, .month, .day, .hour, .minute],
+//                    from: date2)
+//
+//        // 直接日時を設定
+//                let triggerDate = DateComponents(month:4, day:4, hour:18, minute:28, second: 30)
+//                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+//
+//                // 通知コンテンツの作成
+//                let content = UNMutableNotificationContent()
+//                content.title = "Calendar Notification"
+//                content.body = "2020/4/26 21:06:10"
+//                content.sound = UNNotificationSound.default
+//
+//                // 通知リクエストの作成
+//                request = UNNotificationRequest.init(
+//                        identifier: "CalendarNotification",
+//                        content: content,
+//                        trigger: trigger)
+//
+//        os_log("setButton")
+//
+//                // 通知リクエストの登録
+//                let center = UNUserNotificationCenter.current()
+//                center.add(request)
         
         // Do any additional setup after loading the view.
     }
@@ -138,9 +166,41 @@ class A_2_Dish_List_ViewController: UIViewController, UITableViewDelegate, UITab
         let today_DateType = vaildDate_Formatter.date(from: today_String)!
         
         let elapsedDays = Calendar.current.dateComponents([.day], from: today_DateType, to: vaildDate_DateType).day!
+            
         print("vaildDate_String: ",vaildDate_String)
         print("today_DateType: ",today_DateType)
         print("vaildDate_DateType: ",vaildDate_DateType)
+            
+            let dishID = dishesDataSecond_Array[indexPath.row]["dishID"] as? String
+            
+            var targetDate = Calendar.current.dateComponents(
+                [.year, .month, .day, .hour, .minute],
+                        from: vaildDate_DateType)
+//            targetDate.hour = 23
+//            targetDate.minute = 00
+//            targetDate.second = 00
+            // 直接日時を設定
+//                    let triggerDate = DateComponents(hour:18, minute:28, second: 30)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: targetDate, repeats: false)
+                    
+                    // 通知コンテンツの作成
+                    let content = UNMutableNotificationContent()
+                    content.title = "「\(dishname)」は今日が期限です"
+                    content.body = "タップして詳細を確認してください。"
+                    content.sound = UNNotificationSound.default
+             
+                    // 通知リクエストの作成
+                    request = UNNotificationRequest.init(
+                            identifier: "\(dishID)",
+                            content: content,
+                            trigger: trigger)
+            
+                    os_log("setButton")
+             
+                    // 通知リクエストの登録
+                    let center = UNUserNotificationCenter.current()
+                    center.add(request)
+            
             
             
             if elapsedDays == 1 {
