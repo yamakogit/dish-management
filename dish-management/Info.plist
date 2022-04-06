@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>おかず写真を撮影するために使用します</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>アプリ内で撮影した
-おかずの写真を保存するために使用します</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>おかずの写真を選択するために使用します</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ja</string>

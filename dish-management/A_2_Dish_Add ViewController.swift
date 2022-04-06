@@ -464,7 +464,7 @@ class A_2_Dish_Add_ViewController: UIViewController, UITextFieldDelegate,UIPicke
         
         var nowtime = Date()
         dishID_Formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dishIDDate = photoDate_Formatter.string(from: nowtime)
+        dishIDDate = dishID_Formatter.string(from: nowtime)
         
         
         self.groupUid = UserDefaults.standard.string(forKey: "groupUid") ?? "デフォルト値"  //var. 1.0.2
